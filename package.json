@@ -3,15 +3,22 @@
   "version": "1.0.0",
   "description": "Projeto Integrado do módulo de Desenvolvimento de Software Corporativo UNIFEOB",
   "main": "main.js",
+  "type": "module",
   "scripts": {
-    "start": "npx tsc && node ./dist/main.js"
+    "start": "electron src/main.js"
   },
-  "author": "Enzo Daniel Abreu, Gabriel da Silva Freitas, José Carlos Pereira Neto, Lucas Paulino Gomes, Thierry Antonello Pengo",
+  "authors": [
+    "Enzo Daniel Abreu",
+    "Gabriel da Silva Freitas",
+    "José Carlos Pereira Neto",
+    "Lucas Paulino Gomes",
+    "Thierry Antonello Pengo"
+  ],
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^24.3.0",
+    "ejs": "^3.1.10",
     "electron": "^37.3.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "express": "^5.1.0",
+    "express-session": "^1.18.2"
   }
 }
