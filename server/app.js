@@ -1,7 +1,10 @@
+// third-party
 import express from 'express';
 import path  from 'path';
 import session from 'express-session';
-import authRouter from './routers/login.js';
+
+// router
+import router from "./routers/router.js";
 
 const app = express();
 
@@ -17,9 +20,7 @@ app.use(session({
 
 }))
 
-// app.get('/', (req,res) => { return res.status(200).json({message: "Hello World!"}); })
-app.use('/',authRouter)
-//app.use('/dash')
+app.use('/', router);
 
 app.listen(4040, () =>{
     console.log('Servidor inicializado em http://localhost:4040');
