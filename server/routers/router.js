@@ -8,11 +8,12 @@ import auditoriaRouter from "./auditoria.js";
 
 const router = express.Router();
 
-router.use("/login", loginRouter);
+router.use("/resumos", resumosRouter);
 router.use("/relatorios", relatoriosRouter);
 router.use("/config", configRouter);
 router.use("/auditoria", auditoriaRouter);
 
-router.get("/", resumosRouter);
+router.use("/", loginRouter);
+router.use("/login", loginRouter);
 
 export default router;
