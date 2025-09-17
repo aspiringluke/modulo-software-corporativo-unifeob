@@ -20,5 +20,10 @@
     "electron": "^37.3.1",
     "express": "^5.1.0",
     "express-session": "^1.18.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "knex": "^3.1.0",
+    "mysql2": "^3.15.0"
   }
 }
