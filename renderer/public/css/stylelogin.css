@@ -1,0 +1,128 @@
+:root {
+    --background: #29292D;
+    --cinza: #787884;
+    --branco: #D9D9D9;
+    --vermelho: #ff4545;
+    --amarelo: #FCC425;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    padding-top: 120px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 280px;
+    height: 120px;
+    background-image: url('../../view/assets/Logo_Argenzio.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.login-box {
+    background-color: var(--branco);
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+}
+
+.user-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--cinza);
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    position: relative;
+}
+
+.user-icon::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: var(--branco);
+    border-radius: 50%;
+}
+
+.user-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 25px;
+    background-color: var(--branco);
+    border-radius: 50px 50px 0 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+input {
+    margin: 0 0 12px 0;
+    padding: 20px;
+    height: 55px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--cinza);
+    color: var(--branco);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: var(--branco);
+    opacity: 0.7;
+}
+
+button {
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    height: 55px;
+    width: 100%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #ff3318;
+    border: 2px solid var(--amarelo);
+}
