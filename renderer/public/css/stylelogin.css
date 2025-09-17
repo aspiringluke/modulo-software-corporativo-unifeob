@@ -33,7 +33,7 @@ body {
 .logo {
     width: 280px;
     height: 120px;
-    background-image: url('../../view/assets/Logo_Argenzio.png');
+    background-image: url('/assets/Logo_Argenzio.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
