@@ -12,12 +12,21 @@
         <div class="logo"></div>
         <div class="login-box">
             <div class="user-icon"></div>
-            <form method="POST" action="/login">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
+            <form method="POST" id="loginForm" action="/login">
+                <label for="usuario">
+                    <input id="usuario" name="usuario" type="text" placeholder="Usuário" required>
+                </label>
+                <label for="senha">
+                    <input id="senha" name="senha" type="password" placeholder="Senha" required>
+                </label>
+                <% if(typeof erro !== "undefined"){ %>
+                    <h3><%= erro %></h3>
+                <% } %>
                 <button type="submit">Login</button>
             </form>
         </div>
     </div>
+    
+    <!-- <script src="/js/loginScript.js"></script> -->
 </body>
 </html>
