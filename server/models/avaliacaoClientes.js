@@ -7,7 +7,7 @@ export async function getAvaliacoes(req, res)
 
     try {
         const results = await knex("avaliacaocliente").select("*");
-        
+        console.log(results);
         res.status(200).json(results);
     } catch (error) {
         res.render("relatorios", {erro: "Houve um problema ao conectar com o banco de dados: " + error});

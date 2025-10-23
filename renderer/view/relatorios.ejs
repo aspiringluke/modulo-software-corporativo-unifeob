@@ -6,7 +6,7 @@
 	<title>Layout Argenzio</title>
 	<link rel="stylesheet" href="/css/stylemenu.css" />
 	<script defer src="/js/menu-active.js"></script>
-	<script defer type="text/js" src="/js/relatoriosScript.js"></script>
+	<script defer type="text/javascript" src="/js/relatoriosScript.js"></script>
 </head>
 <body>
 	<aside class="sidebar">
@@ -42,5 +42,19 @@
 			</div>
 		</div>
 	</main>
+	<script>
+		"use strict";
+		const avalButton = document.getElementById("avaliacoes");
+
+		avalButton.onclick = async () => {
+			const preElem = document.getElementById("teste");
+
+			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
+			console.log(result);
+			const data = await result.json();
+			
+			preElem.innerHTML = JSON.stringify(data, null, 4);
+		}
+	</script>
 </body>
 </html>
