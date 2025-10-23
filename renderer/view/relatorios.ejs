@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Layout Argenzio</title>
-  <link rel="stylesheet" href="/css/stylemenu.css" />
-  <script defer src="/js/menu-active.js"></script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Layout Argenzio</title>
+	<link rel="stylesheet" href="/css/stylemenu.css" />
+	<script defer src="/js/menu-active.js"></script>
+	<script defer type="text/js" src="/js/relatoriosScript.js"></script>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="profile">
-      <div class="avatar"></div>
-      <div class="user-info">
-        <span class="user-name">Usuário</span>
-        <span class="user-role">Cargo</span>
-      </div>
-    </div>
+	<aside class="sidebar">
+		<div class="profile">
+			<div class="avatar"></div>
+			<div class="user-info">
+				<span class="user-name">Usuário</span>
+				<span class="user-role">Cargo</span>
+			</div>
+		</div>
 
-    <div class="menu-wrapper">
-      <nav class="menu">
-      <a href="/auditoria" class="menu-btn clock" aria-label="Relógio"></a>
-      <a href="/config" class="menu-btn settings" aria-label="Configurações"></a>
-      <a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas"></a>
-      </nav>
-    </div>
-  </aside>
+		<div class="menu-wrapper">
+			<nav class="menu">
+			<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
+			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Relatórios"></a>
+			</nav>
+		</div>
+	</aside>
 
-  <main class="main-content">
-    <div class="logo"></div>
-  </main>
+	<main class="main-content">
+		<div class="logo"></div>
+		<div class="mainDashboard">
+			<div class="containerBotoesMudarRelatorio">
+				<button align="center" id="avaliacoes" class="botaoMudarRelatorio">Press me</button>
+				<button align="center" class="botaoMudarRelatorio" onclick="alert('Rendimento dos Vendedores');">Click me</button>
+			</div>
+			<div id="relatorio">
+				<button align="center" class="botaoMudarRelatorio" onclick="getAvaliacoes();">Hit me</button>
+				<pre id="teste">
+
+				</pre>
+			</div>
+		</div>
+	</main>
 </body>
 </html>
