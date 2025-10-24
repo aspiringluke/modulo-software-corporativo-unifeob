@@ -127,18 +127,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  /* flex-direction: column; */
+
+  background-image: url('/assets/Logo_Argenzio.png');
+  background-repeat: no-repeat;
+  background-size: 320px;
+  background-position:top;
 }
 
 
-.logo {
-  width: 280px;
-  height: 280px;
+/* .logo {
+  position: relative;
+  width: 100%;
+  height: 150px;
   background-image: url('/assets/Logo_Argenzio.png');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
-  transform: translateY(-69px);
-}
+  background-position:top;
+  transform: translateY(-70%);
+} */
 
 .menu-btn.active {
   outline: 3px solid var(--amarelo);

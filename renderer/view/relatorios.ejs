@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Layout Argenzio</title>
 	<link rel="stylesheet" href="/css/stylemenu.css" />
+	<link rel="stylesheet" href="/css/stylerelatorios.css" />
 	<script defer src="/js/menu-active.js"></script>
-	<script defer type="text/javascript" src="/js/relatoriosScript.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -32,14 +32,9 @@
 		<div class="logo"></div>
 		<div class="mainDashboard">
 			<div class="containerBotoesMudarRelatorio">
-				<button align="center" id="avaliacoes" class="botaoMudarRelatorio">Press me</button>
-				<button align="center" class="botaoMudarRelatorio" onclick="alert('Rendimento dos Vendedores');">Click me</button>
+				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
 			</div>
 			<div id="relatorio">
-				<button align="center" class="botaoMudarRelatorio" onclick="getAvaliacoes();">Hit me</button>
-				<pre id="teste">
-
-				</pre>
 				<canvas id="graficoChartJs">
 
 				</canvas>
@@ -57,30 +52,26 @@
 			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
 			console.log(result);
 			const data = await result.json();
-			
-			//preElem.innerHTML = JSON.stringify(data, null, 4);
-
-			const notas = [];
-
-			data.forEach(d => {
-				notas.push(d.nota);
-			});
 
 			new Chart(ctx, {
 			type: 'bar',
 			data: {
-			labels: ["10-9", "8-7", "6-5", "4-3", "2-1"],
-			datasets: [{
-				label: 'Nota',
-				data: notas,
-				borderWidth: 1
-			}]
+				labels: ["1","2","3","4","5","6","7","8","9","10"],
+				datasets: [{
+					label: 'Nota',
+					data: data,
+					borderWidth: 2
+				}]
 			},
 			options: {
 				scales: {
 					y: {
-					beginAtZero: true
+						beginAtZero: true
 					}
+				},
+				animation: {
+					animateRotate: true,
+					animateScale: true
 				}
 			}
 		});
