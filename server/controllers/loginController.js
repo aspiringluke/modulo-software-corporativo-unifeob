@@ -7,11 +7,12 @@ export async function login(req,res)
     try {
         const knex = conectar(usuario, senha);
         await knex.raw("SELECT 1;");
-        
         knex.destroy();
-        res.redirect("../resumos");
+
+        req.session.usuario = usuario;
+        req.session.senha = senha; // TODO: criptografar a senha
+        res.redirect("resumos");
     } catch(err) {
-        console.log(err);
         res.render("login", {erro: "Usuário ou senha inválidos."});
     }
 }
