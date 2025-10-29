@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Layout Argenzio</title>
   <link rel="stylesheet" href="/css/stylemenu.css" />
+  <link rel="stylesheet" href="/css/stylelog.css">
   <script defer src="/js/menu-active.js"></script>
 </head>
 <body>
@@ -28,6 +29,37 @@
 
   <main class="main-content">
     <div class="logo"></div>
+    <table class="auditoria-table">
+      <caption>Log de Auditoria</caption>
+      <thead>
+        <tr>
+          <th>Nome da Tabela</th>
+          <th>Operação</th>
+          <th>Registro Antigo</th>
+          <th>Registro Novo</th>
+          <th>Usuário</th>
+          <th>Horário</th>
+        </tr>
+      </thead>
+        <tbody>
+          <% if (registro_auditoria && registro_auditoria.length > 0) { %>
+            <% registro_auditoria.forEach(registro => { %>
+              <tr>
+                <td><%= registro.tabela %></td>
+                <td><%= registro.operacao %></td>
+                <td><pre><%= JSON.stringify(registro.registro_antigo, null, 2) %></pre></td>
+                <td><pre><%= JSON.stringify(registro.registro_novo, null, 2) %></pre></td>
+                <td><%= registro.usuario %></td>
+                <td><%= registro.horario %></td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6" id="colerror">Nenhum registro encontrado</td>
+            </tr>
+          <% } %>
+      </tbody>
+    </table>
   </main>
 </body>
 </html>
