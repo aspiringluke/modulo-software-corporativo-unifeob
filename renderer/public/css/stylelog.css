@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+}
+
+.auditoria-table{
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 250px;
+}
+
+.auditoria-table caption {
+    border: 1px, solid, gray;
+    background-color: lightblue;
+    color: rgb(129, 108, 108);
+}
+
+.auditoria-table tr, th, td{
+    border: 2px, solid, black;
+}
+
+.auditoria-table th{
+    font-size: 20px;
+}
+
+.auditoria-table td{
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+#colerror{
+    text-align: center;
+}
