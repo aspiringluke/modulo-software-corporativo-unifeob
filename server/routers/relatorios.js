@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAvaliacoes } from "../models/avaliacaoClientes.js";
+import { getAvaliacoes } from "../controllers/avaliacaoClientes.js";
 
 const router = express.Router();
 
