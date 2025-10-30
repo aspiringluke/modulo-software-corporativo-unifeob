@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Layout Argenzio</title>
-  <link rel="stylesheet" href="/css/stylemenu.css" />
-  <link rel="stylesheet" href="/css/stylelog.css">
-  <script defer src="/js/menu-active.js"></script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Layout Argenzio</title>
+	<link rel="stylesheet" href="/css/stylemenu.css" />
+	<link rel="stylesheet" href="/css/stylelog.css">
+	<script defer src="/js/menu-active.js"></script>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="profile">
-      <div class="avatar"></div>
-      <div class="user-info">
-        <span class="user-name">Usuário</span>
-        <span class="user-role">Cargo</span>
-      </div>
-    </div>
+	<aside class="sidebar">
+		<div class="profile">
+			<div class="avatar"></div>
+			<div class="user-info">
+				<span class="user-name">Usuário</span>
+				<span class="user-role">Cargo</span>
+			</div>
+		</div>
 
-    <div class="menu-wrapper">
-      <nav class="menu">
-      <a href="/auditoria" class="menu-btn clock" aria-label="Relógio"></a>
-      <a href="/config" class="menu-btn settings" aria-label="Configurações"></a>
-      <a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas"></a>
-      </nav>
-    </div>
-  </aside>
+		<div class="menu-wrapper">
+			<nav class="menu">
+			<a href="/auditoria" class="menu-btn clock" aria-label="Relógio"></a>
+			<a href="/config" class="menu-btn settings" aria-label="Configurações"></a>
+			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas"></a>
+			</nav>
+		</div>
+	</aside>
 
-  <main class="main-content">
-    <div class="logo"></div>
-    <table class="auditoria-table">
-      <caption>Log de Auditoria</caption>
-      <thead>
-        <tr>
-          <th>Nome da Tabela</th>
-          <th>Operação</th>
-          <th>Registro Antigo</th>
-          <th>Registro Novo</th>
-          <th>Usuário</th>
-          <th>Horário</th>
-        </tr>
-      </thead>
-        <tbody>
-          <% console.log(registro_auditoria); %> 
-          <% if (registro_auditoria) { %>
-          <% console.log(registro_auditoria); %>
-            <% registro_auditoria.forEach(registro => { %>
-              <tr>
-                <td><%= registro.tabela %></td>
-                <td><%= registro.operacao %></td>
-                <td><pre><%= JSON.stringify(registro.registro_antigo, null, 2) %></pre></td>
-                <td><pre><%= JSON.stringify(registro.registro_novo, null, 2) %></pre></td>
-                <td><%= registro.usuario %></td>
-                <td><%= registro.horario %></td>
-              </tr>
-            <% }) %>
-          <% } else if (erro) { %>
-              <% console.log(erro) %>
-              <h2><%= erro %></h2>
-          <% } else { %>
-            <tr>
-              <td colspan="6" id="colerror">Nenhum registro encontrado</td>
-            </tr>
-          <% } %>
-      </tbody>
-    </table>
-  </main>
+	<main class="main-content">
+		<div class="logo"></div>
+		<div class="table-container">
+			<table class="auditoria-table">
+				<caption>Log de Auditoria</caption>
+				<thead>
+					<tr>
+						<th>Nome da Tabela</th>
+						<th>Operação</th>
+						<th>Registro Antigo</th>
+						<th>Registro Novo</th>
+						<th>Usuário</th>
+						<th>Horário</th>
+					</tr>
+				</thead>
+					<tbody>
+						<% if (registro_auditoria) { %>
+							<% registro_auditoria.forEach(registro => { %>
+								<tr>
+									<td><%= registro.tabela %></td>
+									<!-- <td><%= registro.operacao %></td> -->
+									<td>
+										<span class="badge op-<%= registro.operacao.toLowerCase() %>">
+											<%= registro.operacao %>
+										</span>
+									</td>
+									<td><pre><%= JSON.stringify(registro.registro_antigo, null, 2) %></pre></td>
+									<td><pre><%= JSON.stringify(registro.registro_novo, null, 2) %></pre></td>
+									<td><%= registro.usuario %></td>
+									<td><%= registro.horario %></td>
+								</tr>
+							<% }) %>
+						<% } else if (erro) { %>
+								<tr>
+									<td colspan="6" id="colerror"><%= erro %></td>
+								</tr>
+						<% } else { %>
+								<tr>
+									<td colspan="6" id="colerror">Nenhum registro encontrado</td>
+								</tr>
+						<% } %>
+				</tbody>
+			</table>
+		</div>
+	</main>
 </body>
 </html>
