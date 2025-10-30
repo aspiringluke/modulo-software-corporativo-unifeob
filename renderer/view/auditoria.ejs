@@ -42,7 +42,9 @@
         </tr>
       </thead>
         <tbody>
-          <% if (registro_auditoria && registro_auditoria.length > 0) { %>
+          <% console.log(registro_auditoria); %> 
+          <% if (registro_auditoria) { %>
+          <% console.log(registro_auditoria); %>
             <% registro_auditoria.forEach(registro => { %>
               <tr>
                 <td><%= registro.tabela %></td>
@@ -53,6 +55,9 @@
                 <td><%= registro.horario %></td>
               </tr>
             <% }) %>
+          <% } else if (erro) { %>
+              <% console.log(erro) %>
+              <h2><%= erro %></h2>
           <% } else { %>
             <tr>
               <td colspan="6" id="colerror">Nenhum registro encontrado</td>

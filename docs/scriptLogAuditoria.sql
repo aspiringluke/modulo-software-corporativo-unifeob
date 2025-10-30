@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION auditoria()
-RETURNS TRIGGER AS $$
+    RETURNS TRIGGER AS $$
 BEGIN
     IF (TG_OP = 'DELETE') THEN
         INSERT INTO log_auditoria (tabela, operacao, registro_antigo, registro_novo, usuario)
