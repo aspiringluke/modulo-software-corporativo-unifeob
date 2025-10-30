@@ -1,5 +1,5 @@
 import express from "express";
-import { log } from "../controllers/auditoriaController.js"
+import { log } from "../controllers/auditoria.js"
 
 const router = express.Router();
 
