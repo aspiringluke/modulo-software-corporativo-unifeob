@@ -32,7 +32,8 @@
 		<div class="logo"></div>
 		<div class="mainDashboard">
 			<div class="containerBotoesMudarRelatorio">
-				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
+				<button id="avaliacoes" class="botaoMudarRelatorio">Mostrar/Atualizar avaliações</button>
+				<button id="rendimento" class="botaoMudarRelatorio">Mostrar/Atualizar rendimento</button>
 			</div>
 			<div id="relatorio">
 				<canvas id="graficoChartJs">
@@ -44,6 +45,7 @@
 	<script>
 		"use strict";
 		const avalButton = document.getElementById("avaliacoes");
+		const rendButton = document.getElementById("rendimento");
 		const ctx = document.getElementById('graficoChartJs');
 
 		avalButton.onclick = async () => {
@@ -77,6 +79,36 @@
 		});
 		}
 
+		rendButton.onclick = async () => {
+			const preElem = document.getElementById("teste");
+
+			const result = await fetch("http://localhost:4040/relatorios/rendimentovendedores");
+			console.log(result);
+			const data = await result.json();
+
+			new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ["1","2","3","4","5","6","7","8","9","10"],
+				datasets: [{
+					label: 'Nota',
+					data: data,
+					borderWidth: 2
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				},
+				animation: {
+					animateRotate: true,
+					animateScale: true
+				}
+			}
+		});
+		}
 		
 
 		

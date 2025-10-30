@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAvaliacoes } from "../models/avaliacaoClientes.js";
+import { getAvaliacoes } from "../controllers/avaliacaoClientes.js";
 
 const router = express.Router();
 
@@ -15,5 +15,6 @@ router.get("/", (req,res) => {
 });
 
 router.get("/avaliacaoclientes", getAvaliacoes);
+router.get("/rendimentovendedores", getRendimento);
 
 export default router;
