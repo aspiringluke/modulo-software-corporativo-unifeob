@@ -33,6 +33,10 @@
 		<div class="mainDashboard">
 			<div class="containerBotoesMudarRelatorio">
 				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
+				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
+				<button id="avaliacoesProdutos" class="botaoMudarRelatorio">Ver notas dos Produtos</button>
+				<button id="avaliacoesAtendimento" class="botaoMudarRelatorio">Ver notas do Atentimento</button>
+				<a href="/relatorios/nova_avaliacao" id="novaAvaliacao" class="botaoMudarRelatorio" style="text-decoration: none;">Nova Avaliação</a>
 			</div>
 			<div id="relatorio">
 				<canvas id="graficoChartJs">
@@ -44,7 +48,12 @@
 	<script>
 		"use strict";
 		const avalButton = document.getElementById("avaliacoes");
+		const avalVendasButton = document.getElementById("avaliacoesVendas");
+		const avalProdutosButton = document.getElementById("avaliacoesProdutos");
+		const avalAtendimentoButton = document.getElementById("avaliacoesAtendimento");
 		const ctx = document.getElementById('graficoChartJs');
+		let avaliacoes;
+		let grafico;
 
 		avalButton.onclick = async () => {
 			const preElem = document.getElementById("teste");
@@ -52,30 +61,87 @@
 			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
 			console.log(result);
 			const data = await result.json();
-
-			new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ["1","2","3","4","5","6","7","8","9","10"],
-				datasets: [{
-					label: 'Nota',
-					data: data,
-					borderWidth: 2
-				}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true
-					}
-				},
-				animation: {
-					animateRotate: true,
-					animateScale: true
-				}
-			}
-		});
+			
+			avaliacoes = data;
 		}
+
+		avalVendasButton.onclick = () => {
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.vendas,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
+		}
+		avalProdutosButton.onclick = () => {
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.produtos,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
+		}
+		avalAtendimentoButton.onclick = () => {
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.atendimento,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
+		}
+		
+		
 
 		
 

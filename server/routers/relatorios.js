@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAvaliacoes } from "../controllers/avaliacaoClientes.js";
+import { getAvaliacoes, createAvaliacoes } from "../controllers/avaliacaoClientes.js";
 
 const router = express.Router();
 
@@ -15,5 +15,10 @@ router.get("/", (req,res) => {
 });
 
 router.get("/avaliacaoclientes", getAvaliacoes);
+router.get("/nova_avaliacao", (req,res) => {
+    res.render("nova_avaliacao");
+});
+
+router.post("/avaliacaoclientes/nova", createAvaliacoes);
 
 export default router;
