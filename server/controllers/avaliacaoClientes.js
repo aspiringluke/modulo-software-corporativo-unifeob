@@ -19,7 +19,7 @@ export async function getAvaliacoes(req, res)
             if(n.tag === 2) quantidadeNotasProdutos[n.nota.toString()]++;
             if(n.tag === 3) quantidadeNotasAtendimento[n.nota.toString()]++;
         });
-        
+
         res.status(200).json({
             "vendas": Object.values(quantidadeNotasVendas),
             "produtos": Object.values(quantidadeNotasProdutos),
@@ -32,11 +32,28 @@ export async function getAvaliacoes(req, res)
     }
 }
 
-export function createAvaliacoes(req, res)
+export async function createAvaliacoes(req, res)
 {
+    const knex = conectar(req.session.usuario, req.session.senha);
+
     try {
-        
+        console.log(req.body)
+        const { nota, dataavaliacao, idcliente, tag, descricao } = req.body;
+
+        const novaAvaliacao = {
+            nota: parseInt(nota, 10),
+            dataavaliacao: dataavaliacao,
+            idcliente: parseInt(idcliente, 10),
+            tag: parseInt(tag, 10),
+            descricao: descricao
+        };
+
+        await knex("avaliacaocliente").insert(novaAvaliacao);
+
+        res.redirect('http://localhost:4040/relatorios');
     } catch (error) {
-        
+        res.render("nova_avaliacao", { erro: "Houve um problema ao salvar a avaliação: " + error.message });
+    } finally {
+        knex.destroy();
     }
 }
