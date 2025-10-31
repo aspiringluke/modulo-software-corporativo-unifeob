@@ -1,6 +1,7 @@
 import express from "express";
 
 import { getAvaliacoes } from "../controllers/avaliacaoClientes.js";
+import { getRendimento } from "../controllers/rendimentoVendedores.js"
 
 const router = express.Router();
 
