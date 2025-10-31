@@ -64,6 +64,7 @@
             box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
         }
 
+        /* Estilo do botão de Enviar */
         button[type="submit"] {
             width: 100%;
             padding: 0.75rem;
@@ -79,16 +80,36 @@
 
         button[type="submit"]:hover {
             background-color: #0056b3;
-        }
+         }
         
+        /* --- CSS CORRIGIDO PARA O BOTÃO CANCELAR --- */
         .btn {
-            cursor: pointer;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            /* Propriedades de tamanho e fonte copiadas do submit */
+            display: block; /* Para o <a> ocupar a largura total */
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            box-sizing: border-box; /* Garante que o padding não quebre o layout */
+            text-align: center;
+            text-decoration: none;
+
+            /* Propriedades de cor (vermelho) */
+            background-color: #dc3545; /* Um vermelho "perigo" padrão */
             color: white;
-            font-weight: 500;
-            font-size: 14px;
+            
+            /* Outras propriedades */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+            /* Espaçamento entre os botões */
+            margin-top: 0.75rem; 
+        }
+
+        .btn:hover {
+            background-color: #c82333; /* Vermelho mais escuro no hover */
         }
     </style>
 </head>
@@ -110,16 +131,16 @@
             <div class="form-group">
                 <label for="dataavaliacao">Data da Avaliação</label>
                 <input type="datetime-local" id="dataavaliacao" name="dataavaliacao" required>
-            </div>
+       </div>
             
             <div class="form-group">
                 <label for="idcliente">ID do Cliente</label>
                 <input type="number" id="idcliente" name="idcliente" min="1" required>
-            </div>
+       </div>
             
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input type="text" id="descricao" name="descricao" required>
+            <input type="text" id="descricao" name="descricao" required>
             </div>
             
             <div class="form-group">
@@ -133,7 +154,7 @@
             </div>
             
             <button type="submit">Enviar Avaliação</button>
-            <a href="/relatorios" class="btn" style="background-color: #007bff;">Cancelar</a>
+            <a href="/relatorios" class="btn">Cancelar</a>
         </form>
     </div>
 </body>

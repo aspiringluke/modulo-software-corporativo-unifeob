@@ -31,6 +31,7 @@
 	<main class="main-content">
 		<div class="logo"></div>
 		<div class="mainDashboard">
+			<h2 id="tituloRelatorio">Relatório: Notas das Vendas</h2>
 			<div class="containerBotoesMudarRelatorio">
 				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
 				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
@@ -51,6 +52,7 @@
 		const avalVendasButton = document.getElementById("avaliacoesVendas");
 		const avalProdutosButton = document.getElementById("avaliacoesProdutos");
 		const avalAtendimentoButton = document.getElementById("avaliacoesAtendimento");
+		const botoes = document.getElementsByClassName("botaoMudarRelatorio");
 		const ctx = document.getElementById('graficoChartJs');
 		let avaliacoes;
 		let grafico;
@@ -66,6 +68,7 @@
 		}
 
 		avalVendasButton.onclick = () => {
+			atualizarSelecionado(avalVendasButton);
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -91,6 +94,7 @@
 			});
 		}
 		avalProdutosButton.onclick = () => {
+			atualizarSelecionado(avalProdutosButton);
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -116,6 +120,7 @@
 			});
 		}
 		avalAtendimentoButton.onclick = () => {
+			atualizarSelecionado(avalAtendimentoButton);
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -141,11 +146,15 @@
 			});
 		}
 		
-		
+		function atualizarSelecionado(btn)
+		{
+			for(let i=0; i<botoes.length; i++)
+				{
+					botoes[i].className = "botaoMudarRelatorio";
+				}
 
-		
-
-		
+			btn.className = "botaoMudarRelatorio selecionado";
+		}
 	</script>
 </body>
 </html>

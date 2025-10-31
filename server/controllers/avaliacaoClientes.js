@@ -1,8 +1,11 @@
 import { conectar } from "../config/connection.js";
+import { decrypt } from "../services/crypto.js";
 
-// TODO: Separar o model do controller
 export async function getAvaliacoes(req, res)
 {
+    // const out = req.session.senha;
+    // const senha = await decrypt(out.criptografado, out.key, out.iv);
+        
     const knex = conectar(req.session.usuario, req.session.senha);
 
     try {
