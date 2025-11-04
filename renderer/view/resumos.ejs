@@ -19,7 +19,9 @@
 
 		<div class="menu-wrapper">
 			<nav class="menu">
-			<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+			<% if (!roles.includes('atendente')) { %>
+				<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+			<% } %>
 			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
 			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Relatórios"></a>
 			</nav>

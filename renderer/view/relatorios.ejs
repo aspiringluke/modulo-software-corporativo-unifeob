@@ -21,7 +21,9 @@
 
 		<div class="menu-wrapper">
 			<nav class="menu">
-			<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+			<% if (!roles.includes('atendente')) { %>
+				<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+			<% } %>
 			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
 			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Relatórios"></a>
 			</nav>
@@ -31,9 +33,13 @@
 	<main class="main-content">
 		<div class="logo"></div>
 		<div class="mainDashboard">
+			<h2 id="tituloRelatorio">Relatório: Notas das Vendas</h2>
 			<div class="containerBotoesMudarRelatorio">
-				<button id="avaliacoes" class="botaoMudarRelatorio">Mostrar/Atualizar avaliações</button>
-				<button id="rendimento" class="botaoMudarRelatorio">Mostrar/Atualizar rendimento</button>
+				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
+				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
+				<button id="avaliacoesProdutos" class="botaoMudarRelatorio">Ver notas dos Produtos</button>
+				<button id="avaliacoesAtendimento" class="botaoMudarRelatorio">Ver notas do Atentimento</button>
+				<a href="/relatorios/nova_avaliacao" id="novaAvaliacao" class="botaoMudarRelatorio" style="text-decoration: none;">Nova Avaliação</a>
 			</div>
 			<div id="relatorio">
 				<canvas id="graficoChartJs">
@@ -45,8 +51,13 @@
 	<script>
 		"use strict";
 		const avalButton = document.getElementById("avaliacoes");
-		const rendButton = document.getElementById("rendimento");
+		const avalVendasButton = document.getElementById("avaliacoesVendas");
+		const avalProdutosButton = document.getElementById("avaliacoesProdutos");
+		const avalAtendimentoButton = document.getElementById("avaliacoesAtendimento");
+		const botoes = document.getElementsByClassName("botaoMudarRelatorio");
 		const ctx = document.getElementById('graficoChartJs');
+		let avaliacoes;
+		let grafico;
 
 		avalButton.onclick = async () => {
 			const preElem = document.getElementById("teste");
@@ -54,64 +65,98 @@
 			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
 			console.log(result);
 			const data = await result.json();
-
-			new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ["1","2","3","4","5","6","7","8","9","10"],
-				datasets: [{
-					label: 'Nota',
-					data: data,
-					borderWidth: 2
-				}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true
-					}
-				},
-				animation: {
-					animateRotate: true,
-					animateScale: true
-				}
-			}
-		});
+			
+			avaliacoes = data;
 		}
 
-		rendButton.onclick = async () => {
-			const preElem = document.getElementById("teste");
-
-			const result = await fetch("http://localhost:4040/relatorios/rendimentovendedores");
-			console.log(result);
-			const data = await result.json();
-
-			new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ["1","2","3","4","5","6","7","8","9","10"],
-				datasets: [{
-					label: 'Nota',
-					data: data,
-					borderWidth: 2
-				}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true
-					}
+		avalVendasButton.onclick = () => {
+			atualizarSelecionado(avalVendasButton);
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.vendas,
+						borderWidth: 2
+					}]
 				},
-				animation: {
-					animateRotate: true,
-					animateScale: true
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
 				}
-			}
-		});
+			});
+		}
+		avalProdutosButton.onclick = () => {
+			atualizarSelecionado(avalProdutosButton);
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.produtos,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
+		}
+		avalAtendimentoButton.onclick = () => {
+			atualizarSelecionado(avalAtendimentoButton);
+			grafico?.destroy();
+			grafico = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					datasets: [{
+						label: 'Nota',
+						data: avaliacoes?.atendimento,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
 		}
 		
+		function atualizarSelecionado(btn)
+		{
+			for(let i=0; i<botoes.length; i++)
+				{
+					botoes[i].className = "botaoMudarRelatorio";
+				}
 
-		
+			btn.className = "botaoMudarRelatorio selecionado";
+		}
 	</script>
 </body>
 </html>

@@ -31,7 +31,8 @@ CREATE TABLE avaliacaocliente (
     nota INT,
     dataAvaliacao DATE,
     descricao TEXT,
-    idCliente INT REFERENCES cliente(idCliente) ON DELETE CASCADE
+    idCliente INT REFERENCES cliente(idCliente) ON DELETE CASCADE,
+    tag INTEGER
 );
 
 CREATE TABLE venda (
@@ -44,6 +45,11 @@ CREATE TABLE venda (
     idAvaliacao INT REFERENCES avaliacaocliente(idAvaliacao) ON DELETE CASCADE
 );
 
+CREATE TABLE contexto (
+    idContexto SERIAL NOT NULL PRIMARY KEY,
+    descricao VARCHAR(50) NOT NULL
+);
+
 -- Criação dos papéis de usuário
 CREATE ROLE chefe;
 CREATE ROLE atendente;
@@ -53,3 +59,5 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO chefe;
 GRANT SELECT, INSERT, DELETE ON cliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON avaliacaocliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON venda TO atendente;
+
+GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO chefe;

@@ -1,7 +1,6 @@
 import express from "express";
 
-import { getAvaliacoes } from "../controllers/avaliacaoClientes.js";
-import { getRendimento } from "../controllers/rendimentoVendedores.js"
+import { getAvaliacoes, createAvaliacoes } from "../controllers/avaliacaoClientes.js";
 
 const router = express.Router();
 
@@ -12,10 +11,14 @@ const router = express.Router();
  */
 
 router.get("/", (req,res) => {
-    res.render("relatorios");
+    res.render("relatorios", {roles: req.session.roles});
 });
 
 router.get("/avaliacaoclientes", getAvaliacoes);
-router.get("/rendimentovendedores", getRendimento);
+router.get("/nova_avaliacao", (req,res) => {
+    res.render("nova_avaliacao");
+});
+
+router.post("/avaliacaoclientes/nova", createAvaliacoes);
 
 export default router;
