@@ -42,12 +42,18 @@ CREATE TABLE venda (
     dataVenda DATE,
     idCliente INT REFERENCES cliente(idCliente) ON DELETE CASCADE,
     idProduto INT REFERENCES produto(idProduto) ON DELETE CASCADE,
+    idVendedor INT REFERENCES vendedor(idVendedor) ON DELETE CASCADE,
     idAvaliacao INT REFERENCES avaliacaocliente(idAvaliacao) ON DELETE CASCADE
 );
 
 CREATE TABLE contexto (
     idContexto SERIAL NOT NULL PRIMARY KEY,
     descricao VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE vendedor (
+    idVendedor SERIAL NOT NULL PRIMARY KEY,
+    nome VARCHAR(60)
 );
 
 -- Criação dos papéis de usuário
