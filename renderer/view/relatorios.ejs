@@ -24,8 +24,9 @@
 			<% if (!roles.includes('atendente')) { %>
 				<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
 			<% } %>
-			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
-			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Relatórios"></a>
+			<!-- <a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a> -->
+			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Rendimento"></a>
+			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Avaliações"></a>
 			</nav>
 		</div>
 	</aside>
@@ -35,10 +36,15 @@
 		<div class="mainDashboard">
 			<h2 id="tituloRelatorio">Relatório: Notas das Vendas</h2>
 			<div class="containerBotoesMudarRelatorio">
+				<button id="alternarRelatorios" class="botaoMudarRelatorio">Alternar relatório</button>
+
 				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
 				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
 				<button id="avaliacoesProdutos" class="botaoMudarRelatorio">Ver notas dos Produtos</button>
 				<button id="avaliacoesAtendimento" class="botaoMudarRelatorio">Ver notas do Atentimento</button>
+
+				<button id="rendimento">Atualizar rendimento</button>
+
 				<a href="/relatorios/nova_avaliacao" id="novaAvaliacao" class="botaoMudarRelatorio" style="text-decoration: none;">Nova Avaliação</a>
 			</div>
 			<div id="relatorio">
@@ -50,20 +56,75 @@
 	</main>
 	<script>
 		"use strict";
+
+		const alternarButton = document.getElementById("alternarRelatorios");
+		// 0 -> avaliações, 1 -> rendimento
+		let relatorioAtual = 0;
+		
 		const avalButton = document.getElementById("avaliacoes");
 		const avalVendasButton = document.getElementById("avaliacoesVendas");
 		const avalProdutosButton = document.getElementById("avaliacoesProdutos");
 		const avalAtendimentoButton = document.getElementById("avaliacoesAtendimento");
+
 		const botoes = document.getElementsByClassName("botaoMudarRelatorio");
 		const ctx = document.getElementById('graficoChartJs');
 		let avaliacoes;
 		let grafico;
+		
+		async function alternarRelatorio()
+		{
+			if(relatorioAtual === 0)
+			{
+				for(const btn in botoes)
+				{
+					if(btn.id in ['avaliacoes', 'avaliacoesVendas', 'avaliacoesProdutos', 'avaliacoesAtendimento'])
+					{
+						btn.style.display = "none";
+					}
+					else
+					{
+						btn.style.display = "";
+					}
+				}
+			}
+		}
+		
+		async function atualizarRendimento()
+		{
+			grafico?.destroy();
+
+			const result = await fetch("http://localhost:4040/relatorios/rendimento");
+			const data = await result.json();
+
+			grafico = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					// labels: ["Bebida láctea", "Mussarela", "Minas frescal", "Parmesão 6 meses"],
+					labels: ["Jose", "Fabricio", "Andreza", "Adeonofre"],
+					datasets: [{
+						label: 'Produto',
+						data: data.valortotal,
+						borderWidth: 2
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					animation: {
+						animateRotate: true,
+						animateScale: true
+					}
+				}
+			});
+		}
 
 		avalButton.onclick = async () => {
 			const preElem = document.getElementById("teste");
 
 			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
-			console.log(result);
 			const data = await result.json();
 			
 			avaliacoes = data;
