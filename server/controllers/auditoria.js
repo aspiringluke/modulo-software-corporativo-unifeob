@@ -10,7 +10,7 @@ export async function log(req, res) {
 
         const registro_auditoria_ = await knex('log_auditoria').select("*");
         knex.destroy();
-        res.render("auditoria", { registro_auditoria: registro_auditoria_, roles: req.session.roles});
+        res.render("auditoria", { registro_auditoria: registro_auditoria_, usuario: req.session.usuario, roles: req.session.roles});
 
     }catch (err){
         res.render("auditoria", {erro: "Não foi possível renderizar os logs de auditoria!" + err, registro_auditoria: null});

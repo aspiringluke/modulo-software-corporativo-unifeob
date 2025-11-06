@@ -26,7 +26,7 @@ export async function login(req,res)
         // console.log([cript.criptografado, cript.key, cript.iv])
         // console.log([process.env.PSS.byteLength, process.env.KEY.type, process.env.IV]);
         
-        res.render("resumos", {roles: req.session.roles});
+        res.render("resumos", {usuario: req.session.usuario, roles: req.session.roles});
     } catch(err) {
         res.render("login", {erro: "Usuário ou senha inválidos.", roles: null});
     }

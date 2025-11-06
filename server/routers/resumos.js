@@ -5,7 +5,7 @@ import { conectar } from "../config/connection.js";
 const router = express.Router();
 
 router.get("/", (req,res) => {
-    res.render("resumos");
+    res.render("resumos", {usuario: req.session.usuario, roles: req.session.roles});
 });
 
 

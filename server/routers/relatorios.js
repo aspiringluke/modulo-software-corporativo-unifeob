@@ -11,7 +11,7 @@ const router = express.Router();
  */
 
 router.get("/", (req,res) => {
-    res.render("relatorios", {roles: req.session.roles});
+    res.render("relatorios", {usuario: req.session.usuario, roles: req.session.roles});
 });
 
 router.get("/avaliacaoclientes", getAvaliacoes);
