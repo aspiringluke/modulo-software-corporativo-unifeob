@@ -1,12 +1,13 @@
 import { conectar } from "../config/connection.js";
+import { lerCredenciais } from "./secureStorage.js";
 import { decrypt } from "../services/crypto.js";
 
 export async function log(req, res) {
     try {
         // const out = req.session.senha;
         // const senha = await decrypt(out.criptografado, out.key, out.iv);
-
-        const knex = conectar(req.session.usuario, req.session.senha);
+        const senha = await lerCredenciais(req.session.usuario);
+        const knex = conectar(req.session.usuario, senha);
 
         const registro_auditoria_ = await knex('log_auditoria').select("*");
         knex.destroy();
