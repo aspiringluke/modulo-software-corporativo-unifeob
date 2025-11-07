@@ -5,7 +5,11 @@ function createWindow()
 {
     const win = new BrowserWindow({
         width: 1920/2,
-        height: 1080/2
+        height: 1080/2,
+        webPreferences: {
+            contextIsolation: true,
+            nodeIntegration: false
+        }
     });
     win.loadURL("http://localhost:4040");
 }
