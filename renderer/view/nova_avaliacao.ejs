@@ -82,34 +82,26 @@
             background-color: #0056b3;
          }
         
-        /* --- CSS CORRIGIDO PARA O BOTÃO CANCELAR --- */
         .btn {
-            /* Propriedades de tamanho e fonte copiadas do submit */
-            display: block; /* Para o <a> ocupar a largura total */
+            display: block;
             width: 100%;
             padding: 0.75rem;
             font-size: 1rem;
             font-weight: 600;
             border-radius: 6px;
-            box-sizing: border-box; /* Garante que o padding não quebre o layout */
+            box-sizing: border-box;
             text-align: center;
             text-decoration: none;
-
-            /* Propriedades de cor (vermelho) */
-            background-color: #dc3545; /* Um vermelho "perigo" padrão */
+            background-color: #dc3545;
             color: white;
-            
-            /* Outras propriedades */
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            
-            /* Espaçamento entre os botões */
             margin-top: 0.75rem; 
         }
 
         .btn:hover {
-            background-color: #c82333; /* Vermelho mais escuro no hover */
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -152,10 +144,59 @@
                     <option value="3">Atendimento</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <div id="escolherProduto">
+                    <label for="produto">Selecione o produto:</label>
+                    <select id="produto">
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+                
+                <div id="escolherVendedor">
+                    <label for="vendedor">Selecione o vendedor:</label>
+                    <select id="vendedor">
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+            </div>
             
             <button type="submit">Enviar Avaliação</button>
             <a href="/relatorios" class="btn">Cancelar</a>
         </form>
     </div>
+    <script>
+        "use strict";
+
+        const produto = document.getElementById("escolherProduto");
+        const vendedor = document.getElementById("escolherVendedor");
+        
+        const listaProdutos = null;
+        const listaVendedores = null;
+        
+        const tag = document.getElementById("tag");
+        
+        produto.style.display = "none";
+        vendedor.style.display = "none";
+
+        tag.onchange = () => {
+            const idx = tag.selectedIndex;
+            if(idx === 1)
+            {
+                vendedor.style.display = "";
+                produto.style.display = "none";
+            }
+            else if(idx === 2)
+            {
+                vendedor.style.display = "none";
+                produto.style.display = "";
+            }
+            else
+            {
+                vendedor.style.display = "none";
+                produto.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
