@@ -167,13 +167,23 @@
     </div>
     <script>
         "use strict";
+        
+        async function get(url)
+        {
+            const results = await fetch(url);
+            return await results.json();
+        }
 
         const produto = document.getElementById("escolherProduto");
         const vendedor = document.getElementById("escolherVendedor");
         
-        const listaProdutos = null;
-        const listaVendedores = null;
+        const listaProdutos = get("http://localhost:4040/produtos");
+        const listaVendedores = get("http://localhost:4040/vendedores");
         
+        console.log(listaProdutos);
+        console.log(listaVendedores);
+        console.table(listaProdutos);
+        console.table(listaVendedores);
         const tag = document.getElementById("tag");
         
         produto.style.display = "none";
