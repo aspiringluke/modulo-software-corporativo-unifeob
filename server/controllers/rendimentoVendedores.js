@@ -1,8 +1,10 @@
 import { conectar } from "../config/connection.js";
+import { lerCredenciais } from "./secureStorage.js";
 
 export async function getRendimento(req, res)
 {
-    const knex = conectar(req.session.usuario, req.session.senha);
+    const senha = await lerCredenciais(req.session.usuario);
+    const knex = conectar(req.session.usuario, senha);
 
     try {
         const results = await knex("NOME_DA_TABELA").select("*");

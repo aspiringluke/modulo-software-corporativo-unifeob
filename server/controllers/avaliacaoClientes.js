@@ -1,12 +1,13 @@
 import { conectar } from "../config/connection.js";
+import { lerCredenciais } from "./secureStorage.js";
 import { decrypt } from "../services/crypto.js";
 
 export async function getAvaliacoes(req, res)
 {
     // const out = req.session.senha;
     // const senha = await decrypt(out.criptografado, out.key, out.iv);
-        
-    const knex = conectar(req.session.usuario, req.session.senha);
+    const senha = await lerCredenciais(req.session.usuario);
+    const knex = conectar(req.session.usuario, senha);
 
     try {
         const results = await knex("avaliacaocliente").select("*");
@@ -37,7 +38,8 @@ export async function getAvaliacoes(req, res)
 
 export async function createAvaliacoes(req, res)
 {
-    const knex = conectar(req.session.usuario, req.session.senha);
+    const senha = await lerCredenciais(req.session.usuario);
+    const knex = conectar(req.session.usuario, senha);
 
     try {
         console.log(req.body)
