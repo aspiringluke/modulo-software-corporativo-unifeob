@@ -9,5 +9,5 @@ export async function getUserRole(user, password){
     .select('r.rolname');
 
     await knex.destroy();
-    return rolename.rows.map(r => r.rolname);
+    return rolename.map(r => r.rolname);
 }
