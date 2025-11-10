@@ -12,6 +12,7 @@ function createWindow()
         }
     });
     win.loadURL("http://localhost:4040");
+    win.maximize();
 }
 
 app.whenReady().then(() => {
