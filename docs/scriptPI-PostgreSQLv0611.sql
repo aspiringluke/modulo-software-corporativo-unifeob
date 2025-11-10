@@ -62,6 +62,7 @@ CREATE ROLE atendente;
 
 -- Gerenciamento de permissões
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO chefe;
+ALTER ROLE chefe WITH NOSUPERUSER;
 GRANT SELECT, INSERT, DELETE ON cliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON avaliacaocliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON venda TO atendente;
