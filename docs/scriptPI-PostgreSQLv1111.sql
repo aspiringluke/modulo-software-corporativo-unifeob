@@ -56,6 +56,16 @@ CREATE TABLE vendedor (
     nome VARCHAR(60)
 );
 
+CREATE TABLE log_auditoria (
+    idlog INT NOT NULL,
+    tabela TEXT,
+    operacao TEXT,
+    registro_antigo jsonb,
+    registro_novo jsonb,
+    usuario VARCHAR(45),
+    horario TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
+);
+
 -- Criação dos papéis de usuário
 CREATE ROLE chefe;
 CREATE ROLE atendente;
