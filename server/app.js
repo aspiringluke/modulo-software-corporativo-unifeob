@@ -29,5 +29,5 @@ app.use(session({
 app.use('/', router);
 
 app.listen(4040, () =>{
-    console.log('Servidor inicializado em http://localhost:4040');
+    // console.log('Servidor inicializado em http://localhost:4040');
 });

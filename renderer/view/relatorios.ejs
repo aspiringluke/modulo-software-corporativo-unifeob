@@ -36,14 +36,14 @@
 		<div class="mainDashboard">
 			<h2 id="tituloRelatorio">Relatório: Notas das Vendas</h2>
 			<div class="containerBotoesMudarRelatorio">
-				<button id="alternarRelatorios" class="botaoMudarRelatorio">Alternar relatório</button>
+				<!-- <button id="alternarRelatorios" class="botaoMudarRelatorio">Alternar relatório</button> -->
 
 				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
 				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
 				<button id="avaliacoesProdutos" class="botaoMudarRelatorio">Ver notas dos Produtos</button>
 				<button id="avaliacoesAtendimento" class="botaoMudarRelatorio">Ver notas do Atentimento</button>
 
-				<button id="rendimento">Atualizar rendimento</button>
+				<!-- <button id="rendimento">Atualizar rendimento</button> -->
 
 				<a href="/relatorios/nova_avaliacao" id="novaAvaliacao" class="botaoMudarRelatorio" style="text-decoration: none;">Nova Avaliação</a>
 			</div>
@@ -57,9 +57,9 @@
 	<script>
 		"use strict";
 
-		const alternarButton = document.getElementById("alternarRelatorios");
+		// const alternarButton = document.getElementById("alternarRelatorios");
 		// 0 -> avaliações, 1 -> rendimento
-		let relatorioAtual = 0;
+		// let relatorioAtual = 0;
 		
 		const avalButton = document.getElementById("avaliacoes");
 		const avalVendasButton = document.getElementById("avaliacoesVendas");
@@ -88,40 +88,10 @@
 				}
 			}
 		}
+
+		avalButton.onclick = 
 		
-		async function atualizarRendimento()
-		{
-			grafico?.destroy();
-
-			const result = await fetch("http://localhost:4040/relatorios/rendimento");
-			const data = await result.json();
-
-			grafico = new Chart(ctx, {
-				type: 'pie',
-				data: {
-					// labels: ["Bebida láctea", "Mussarela", "Minas frescal", "Parmesão 6 meses"],
-					labels: ["Jose", "Fabricio", "Andreza", "Adeonofre"],
-					datasets: [{
-						label: 'Produto',
-						data: data.valortotal,
-						borderWidth: 2
-					}]
-				},
-				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
-					},
-					animation: {
-						animateRotate: true,
-						animateScale: true
-					}
-				}
-			});
-		}
-
-		avalButton.onclick = async () => {
+		async function atualizarRelatorios(){
 			const preElem = document.getElementById("teste");
 
 			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
@@ -130,8 +100,9 @@
 			avaliacoes = data;
 		}
 
-		avalVendasButton.onclick = () => {
+		avalVendasButton.onclick = async () => {
 			atualizarSelecionado(avalVendasButton);
+			await atualizarRelatorios();
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -144,11 +115,7 @@
 					}]
 				},
 				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
-					},
+					scales: { y: { beginAtZero: true } },
 					animation: {
 						animateRotate: true,
 						animateScale: true
@@ -156,8 +123,9 @@
 				}
 			});
 		}
-		avalProdutosButton.onclick = () => {
+		avalProdutosButton.onclick = async () => {
 			atualizarSelecionado(avalProdutosButton);
+			await atualizarRelatorios();
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -170,11 +138,7 @@
 					}]
 				},
 				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
-					},
+					scales: { y: { beginAtZero: true } },
 					animation: {
 						animateRotate: true,
 						animateScale: true
@@ -182,8 +146,9 @@
 				}
 			});
 		}
-		avalAtendimentoButton.onclick = () => {
+		avalAtendimentoButton.onclick = async () => {
 			atualizarSelecionado(avalAtendimentoButton);
+			await atualizarRelatorios();
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
@@ -196,11 +161,7 @@
 					}]
 				},
 				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
-					},
+					scales: { y: { beginAtZero: true } },
 					animation: {
 						animateRotate: true,
 						animateScale: true
@@ -212,9 +173,9 @@
 		function atualizarSelecionado(btn)
 		{
 			for(let i=0; i<botoes.length; i++)
-				{
-					botoes[i].className = "botaoMudarRelatorio";
-				}
+			{
+				botoes[i].className = "botaoMudarRelatorio";
+			}
 
 			btn.className = "botaoMudarRelatorio selecionado";
 		}

@@ -42,15 +42,16 @@ export async function createAvaliacoes(req, res)
     const knex = conectar(req.session.usuario, senha);
 
     try {
-        console.log(req.body)
-        const { nota, dataavaliacao, idcliente, tag, descricao } = req.body;
+        const { nota, dataavaliacao, idcliente, tag, descricao, produto, vendedor } = req.body;
 
         const novaAvaliacao = {
             nota: parseInt(nota, 10),
             dataavaliacao: dataavaliacao,
             idcliente: parseInt(idcliente, 10),
             tag: parseInt(tag, 10),
-            descricao: descricao
+            descricao: descricao,
+            idproduto: produto,
+            idvendedor: vendedor
         };
 
         await knex("avaliacaocliente").insert(novaAvaliacao);
