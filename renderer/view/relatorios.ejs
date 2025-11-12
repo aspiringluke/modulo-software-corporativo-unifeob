@@ -24,8 +24,8 @@
 			<% if (!roles.includes('atendente')) { %>
 				<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
 			<% } %>
-			<!-- <a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a> -->
-			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Rendimento"></a>
+			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
+			<!-- <a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Rendimento"></a> -->
 			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Avaliações"></a>
 			</nav>
 		</div>
@@ -38,7 +38,6 @@
 			<div class="containerBotoesMudarRelatorio">
 				<!-- <button id="alternarRelatorios" class="botaoMudarRelatorio">Alternar relatório</button> -->
 
-				<button id="avaliacoes" class="botaoMudarRelatorio">Atualizar relatório</button>
 				<button id="avaliacoesVendas" class="botaoMudarRelatorio">Ver notas das Vendas</button>
 				<button id="avaliacoesProdutos" class="botaoMudarRelatorio">Ver notas dos Produtos</button>
 				<button id="avaliacoesAtendimento" class="botaoMudarRelatorio">Ver notas do Atentimento</button>
@@ -57,10 +56,6 @@
 	<script>
 		"use strict";
 
-		// const alternarButton = document.getElementById("alternarRelatorios");
-		// 0 -> avaliações, 1 -> rendimento
-		// let relatorioAtual = 0;
-		
 		const avalButton = document.getElementById("avaliacoes");
 		const avalVendasButton = document.getElementById("avaliacoesVendas");
 		const avalProdutosButton = document.getElementById("avaliacoesProdutos");
@@ -89,8 +84,6 @@
 			}
 		}
 
-		avalButton.onclick = 
-		
 		async function atualizarRelatorios(){
 			const preElem = document.getElementById("teste");
 
