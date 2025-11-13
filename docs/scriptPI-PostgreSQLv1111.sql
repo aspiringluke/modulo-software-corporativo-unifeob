@@ -1,18 +1,6 @@
 -- Criação do banco de dados do PI
 CREATE DATABASE sistema_argenzio;
 
--- Criação do tipo ENUM para o campo 'tipo'
-CREATE TYPE tipo_usuario AS ENUM ('atendente', 'chefe');
-
--- Criação das tabelas
-CREATE TABLE usuario (
-    idUsuario SERIAL PRIMARY KEY,
-    tipo tipo_usuario,
-    nome VARCHAR(45),
-    email VARCHAR(50) UNIQUE,
-    senha VARCHAR(8)
-);
-
 CREATE TABLE cliente (
     idCliente SERIAL PRIMARY KEY,
     nome VARCHAR(60),
@@ -54,6 +42,16 @@ CREATE TABLE contexto (
 CREATE TABLE vendedor (
     idVendedor SERIAL NOT NULL PRIMARY KEY,
     nome VARCHAR(60)
+);
+
+CREATE TABLE log_auditoria (
+    idlog SERIAL PRIMARY KEY,
+    tabela TEXT,
+    operacao TEXT,
+    registro_antigo jsonb,
+    registro_novo jsonb,
+    usuario VARCHAR(45),
+    horario TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 );
 
 -- Criação dos papéis de usuário
