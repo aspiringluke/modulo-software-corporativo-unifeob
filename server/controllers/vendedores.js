@@ -11,8 +11,6 @@ export async function selectAll(req, res)
         
         res.status(200).json(results);
     } catch (error) {
-        console.clear();
-        console.log(error);
         res.render("relatorios", {usuario: req.session.usuario, roles: req.session.roles, erro: "Houve um problema ao conectar com o banco de dados: " + error});
     } finally {
         knex.destroy();

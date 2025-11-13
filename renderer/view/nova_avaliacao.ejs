@@ -1,212 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Avaliação de Cliente</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nova Avaliação de Cliente</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			background-color: #f0f2f5;
+			margin: 0;
+			padding: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			box-sizing: border-box;
+		}
 
-        .form-container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+		.form-container {
+			background-color: #ffffff;
+			padding: 2rem;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			max-width: 500px;
+			width: 100%;
+			box-sizing: border-box;
+		}
 
-        h1 {
-            text-align: center;
-            color: #1c1e21;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.75rem;
-        }
+		h1 {
+			text-align: center;
+			color: #1c1e21;
+			margin-top: 0;
+			margin-bottom: 1.5rem;
+			font-size: 1.75rem;
+		}
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+		.form-group {
+			margin-bottom: 1rem;
+		}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #4b4f56;
-        }
+		.form-group label {
+			display: block;
+			margin-bottom: 0.5rem;
+			font-weight: 600;
+			color: #4b4f56;
+		}
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            color: #1c1e21;
-        }
+		.form-group input,
+		.form-group select {
+			width: 100%;
+			padding: 0.75rem;
+			border: 1px solid #dddfe2;
+			border-radius: 6px;
+			box-sizing: border-box;
+			font-size: 1rem;
+			color: #1c1e21;
+		}
 
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-        }
+		.form-group input:focus,
+		.form-group select:focus {
+			border-color: #007bff;
+			outline: none;
+			box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+		}
 
-        /* Estilo do botão de Enviar */
-        button[type="submit"] {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+		/* Estilo do botão de Enviar */
+		button[type="submit"] {
+			width: 100%;
+			padding: 0.75rem;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 6px;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
 
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-         }
-        
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 6px;
-            box-sizing: border-box;
-            text-align: center;
-            text-decoration: none;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 0.75rem; 
-        }
+		button[type="submit"]:hover {
+			background-color: #0056b3;
+		 }
+		
+		.btn {
+			display: block;
+			width: 100%;
+			padding: 0.75rem;
+			font-size: 1rem;
+			font-weight: 600;
+			border-radius: 6px;
+			box-sizing: border-box;
+			text-align: center;
+			text-decoration: none;
+			background-color: #dc3545;
+			color: white;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			margin-top: 0.75rem; 
+		}
 
-        .btn:hover {
-            background-color: #c82333;
-        }
-    </style>
+		.btn:hover {
+			background-color: #c82333;
+		}
+	</style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Nova Avaliação de Cliente</h1>
-        <form action="/relatorios/avaliacaoclientes/nova" method="POST">
-            <% try { %>
-                <% if (erro) { %>
-                    <h3><%= erro %></h3>
-                <% } %>
-            <% } catch(err) {} %>
-            
-            <div class="form-group">
-                <label for="nota">Nota (0-10)</label>
-                <input type="number" id="nota" name="nota" min="0" max="10" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="dataavaliacao">Data da Avaliação</label>
-                <input type="datetime-local" id="dataavaliacao" name="dataavaliacao" required>
-       </div>
-            
-            <div class="form-group">
-                <label for="idcliente">ID do Cliente</label>
-                <input type="number" id="idcliente" name="idcliente" min="1" required>
-       </div>
-            
-            <div class="form-group">
-                <label for="descricao">Descrição</label>
-            <input type="text" id="descricao" name="descricao" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="tag">Tag da Avaliação (1-3)</label>
-                <select id="tag" name="tag" required>
-                    <option value="" disabled selected>Selecione uma tag...</option>
-                    <option value="1">Vendas</option>
-                    <option value="2">Produtos</option>
-                    <option value="3">Atendimento</option>
-                </select>
-            </div>
+	<div class="form-container">
+		<h1>Nova Avaliação de Cliente</h1>
+		<form action="/relatorios/avaliacaoclientes/nova" method="POST">
+			<% try { %>
+				<% if (erro) { %>
+					<h3><%= erro %></h3>
+				<% } %>
+			<% } catch(err) {} %>
+			
+			<div class="form-group">
+				<label for="nota">Nota (0-10)</label>
+				<input type="number" id="nota" name="nota" min="0" max="10" required>
+			</div>
+			
+			<div class="form-group">
+				<label for="dataavaliacao">Data da Avaliação</label>
+				<input type="datetime-local" id="dataavaliacao" name="dataavaliacao" required>
+	   </div>
+			
+			<div class="form-group">
+				<label for="idcliente">ID do Cliente</label>
+				<input type="number" id="idcliente" name="idcliente" min="1" required>
+	   </div>
+			
+			<div class="form-group">
+				<label for="descricao">Descrição</label>
+			<input type="text" id="descricao" name="descricao" required>
+			</div>
+			
+			<div class="form-group">
+				<label for="tag">Tag da Avaliação (1-3)</label>
+				<select id="tag" name="tag" required>
+					<option value="" disabled selected>Selecione uma tag...</option>
+					<option value="1">Vendas</option>
+					<option value="2">Produtos</option>
+					<option value="3">Atendimento</option>
+				</select>
+			</div>
 
-            <div class="form-group">
-                <div id="escolherProduto">
-                    <label for="produto">Selecione o produto:</label>
-                    <select id="produto">
-                        <option value="" disabled selected>Selecione...</option>
-                    </select>
-                </div>
-                
-                <div id="escolherVendedor">
-                    <label for="vendedor">Selecione o vendedor:</label>
-                    <select id="vendedor">
-                        <option value="" disabled selected>Selecione...</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button type="submit">Enviar Avaliação</button>
-            <a href="/relatorios" class="btn">Cancelar</a>
-        </form>
-    </div>
-    <script>
-        "use strict";
-        
-        async function get(url)
-        {
-            const results = await fetch(url);
-            return await results.json();
-        }
+			<div class="form-group">
+				<div id="escolherProduto">
+					<label for="produto">Selecione o produto:</label>
+					<select id="produto">
+						<option value="" disabled selected>Selecione...</option>
+					</select>
+				</div>
+				
+				<div id="escolherVendedor">
+					<label for="vendedor">Selecione o vendedor:</label>
+					<select id="vendedor">
+						<option value="" disabled selected>Selecione...</option>
+					</select>
+				</div>
+			</div>
+			
+			<button type="submit">Enviar Avaliação</button>
+			<a href="/relatorios" class="btn">Cancelar</a>
+		</form>
+	</div>
+	<script>
+		"use strict";
+		
+		let listaProdutos;
+		let listaVendedores;
 
-        const produto = document.getElementById("escolherProduto");
-        const vendedor = document.getElementById("escolherVendedor");
-        
-        const listaProdutos = get("http://localhost:4040/produtos");
-        const listaVendedores = get("http://localhost:4040/vendedores");
-        
-        console.log(listaProdutos);
-        console.log(listaVendedores);
-        console.table(listaProdutos);
-        console.table(listaVendedores);
-        const tag = document.getElementById("tag");
-        
-        produto.style.display = "none";
-        vendedor.style.display = "none";
+		async function get()
+		{
+			listaProdutos = await fetch("http://localhost:4040/produtos");
+			listaVendedores = await fetch("http://localhost:4040/vendedores");
+			listaProdutos = await listaProdutos.json();
+			listaVendedores = await listaVendedores.json();
 
-        tag.onchange = () => {
-            const idx = tag.selectedIndex;
-            if(idx === 1)
-            {
-                vendedor.style.display = "";
-                produto.style.display = "none";
-            }
-            else if(idx === 2)
-            {
-                vendedor.style.display = "none";
-                produto.style.display = "";
-            }
-            else
-            {
-                vendedor.style.display = "none";
-                produto.style.display = "none";
-            }
-        }
-    </script>
+			return { listaProdutos, listaVendedores };
+		}
+		
+		const produto = document.getElementById("escolherProduto");
+		const vendedor = document.getElementById("escolherVendedor");
+		const selectProduto = document.getElementById("produto");
+		const selectVendedor = document.getElementById("vendedor");
+
+		get().then(data => {
+			let i=1;
+			for(const p of data.listaProdutos)
+			{
+				let option = document.createElement('option');
+				option.textContent = p.descricao;
+				option.value = i;
+				i++;
+				selectProduto.appendChild(option);
+			}
+
+			i=0;
+			for(const v of data.listaVendedores)
+			{
+				let option = document.createElement('option');
+				option.textContent = v.nome;
+				option.value = i;
+				i++;
+				selectVendedor.appendChild(option);
+			}
+		});
+		
+		const tag = document.getElementById("tag");
+		
+		produto.style.display = "none";
+		vendedor.style.display = "none";
+
+		tag.onchange = () => {
+			const idx = tag.selectedIndex;
+			if(idx === 1)
+			{
+				vendedor.style.display = "";
+				produto.style.display = "none";
+			}
+			else if(idx === 2)
+			{
+				vendedor.style.display = "none";
+				produto.style.display = "";
+			}
+			else
+			{
+				vendedor.style.display = "none";
+				produto.style.display = "none";
+			}
+		}
+	</script>
 </body>
 </html>
