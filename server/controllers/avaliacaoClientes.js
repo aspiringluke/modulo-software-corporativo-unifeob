@@ -50,8 +50,8 @@ export async function createAvaliacoes(req, res)
             idcliente: parseInt(idcliente, 10),
             tag: parseInt(tag, 10),
             descricao: descricao,
-            produto: produto,
-            vendedor: vendedor
+            idproduto: produto,
+            idvendedor: vendedor
         };
 
         await knex("avaliacaocliente").insert(novaAvaliacao);
