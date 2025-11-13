@@ -77,16 +77,64 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
 2. ⚙️ **Instalação de Dependências**
 
-    Antes de executar a aplicação, é necessário instalar as dependências do projeto.
+    💡 **Certifique-se de ter o Node.js e o npm instalados na máquina antes de prosseguir.**
+   
+    Antes de executar a aplicação, é necessário criar o package.json e instalar as dependências do projeto.
     No terminal, execute:
+
+    ```
+    npm init -y
+    ```
+    Esse comando irá criar o package.json que contém informações básicas do projeto e uma lista das dependências utilizadas
 
     ```
     npm install
     ```
+    Esse comando irá instalar no package.json as dependências necessárias colocando seu nome ao lado e indicando se vai instalar a versão de desenvolvimento ou não
+   
+    - Dependências:
+        - electron: 
+        ``` 
+        npm i electron --save-dev
+        ```
 
-    💡 **Certifique-se de ter o Node.js e o npm instalados na máquina antes de prosseguir.**
+        - express:
+        ``` 
+        npm i express --save-dev
+        ```
 
-3. 💻 **Execução da Aplicação em Ambiente de Desenvolvimento**
+        - ejs:
+        ``` 
+        npm i ejs --save-dev
+        ```
+
+        - express-session:
+        ``` 
+        npm i express-session --save-dev
+        ```
+
+        - dotenv:
+        ``` 
+        npm i dotenv --save
+        ```
+        
+        - knex:
+        ```
+        npm i knex --save
+        ```
+        
+        - keytar:
+        ``` 
+        npm i keytar --save
+        ```
+
+        - pg:
+        ``` 
+        npm i pg --save
+        ```
+
+
+4. 💻 **Execução da Aplicação em Ambiente de Desenvolvimento**
 
     - Para iniciar o sistema em modo de desenvolvimento, utilize o comando:
     
@@ -96,7 +144,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
   
       Isso iniciará o Electron e abrirá a aplicação desktop.
 
-4. 🏗️ **Geração de Executável (Build)**
+5. 🏗️ **Geração de Executável (Build)**
 
     - Para gerar a versão final da aplicação, utilize o Electron Builder com o comando:
 
@@ -112,7 +160,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
       Aqui você pode especificar o nome do arquivo gerado, a plataforma (Windows, Linux, macOS) e outras observações, como permissões ou configurações adicionais.
 
-5. 🔑 **Acesso ao Sistema**
+6. 🔑 **Acesso ao Sistema**
 
     Após a instalação, o sistema solicitará autenticação de usuário.
     Use as credenciais padrão de teste:
@@ -133,7 +181,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
     Essas credenciais podem ser modificadas diretamente no banco de dados PostgreSQL, conforme os papéis definidos (usuário chefe e atendente).
 
-6. 🧰 **Requisitos do Sistema**
+7. 🧰 **Requisitos do Sistema**
 
 - Node.js: versão recomendada 18.x ou superior
 
@@ -142,3 +190,4 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
