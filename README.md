@@ -1,5 +1,9 @@
 # 💻 Desenvolvimento de Software Corporativo
 
+<div align= "right">
+    <img align="right" src= "readme-images/logo-unifeob.png" alt= "logo da Unifeob" width="250"/>
+</div>
+
 4º Semestre do curso de Ciência da Computação
 UNIFEOB
 
