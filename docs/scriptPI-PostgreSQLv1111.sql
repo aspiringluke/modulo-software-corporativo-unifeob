@@ -20,6 +20,8 @@ CREATE TABLE avaliacaocliente (
     dataAvaliacao DATE,
     descricao TEXT,
     idCliente INT REFERENCES cliente(idCliente) ON DELETE CASCADE,
+    idProduto INT REFERENCES produto(idProduto) ON DELETE CASCADE,
+    idVendedor INT REFERENCES vendedor(idVendedor) ON DELETE CASCADE,
     tag INTEGER
 );
 
