@@ -47,9 +47,22 @@
 				<a href="/relatorios/nova_avaliacao" id="novaAvaliacao" class="botaoMudarRelatorio" style="text-decoration: none;">Nova Avaliação</a>
 			</div>
 			<div id="relatorio">
-				<canvas id="graficoChartJs">
+				<!-- <canvas id="graficoChartJs">
 
-				</canvas>
+				</canvas> -->
+				<div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+					<h2 class="text-xl font-semibold mb-4 text-center text-green-400">Melhores Avaliados</h2>
+					<div class="relative h-96">
+						<canvas class="graficoChartJs graficoMelhores"></canvas>
+					</div>
+				</div>
+
+				<div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+					<h2 class="text-xl font-semibold mb-4 text-center text-red-400">Piores Avaliados</h2>
+					<div class="relative h-96">
+						<canvas class="graficoChartJs graficoPiores"></canvas>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>
@@ -84,10 +97,10 @@
 			}
 		}
 
-		async function atualizarRelatorios(){
+		async function atualizarRelatorios(categoria){
 			const preElem = document.getElementById("teste");
 
-			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
+			const result = await fetch(`http://localhost:4040/relatorios/avaliacaoclientes/${categoria}`);
 			const data = await result.json();
 			
 			avaliacoes = data;
@@ -95,61 +108,30 @@
 
 		avalVendasButton.onclick = async () => {
 			atualizarSelecionado(avalVendasButton);
-			await atualizarRelatorios();
-			grafico?.destroy();
-			grafico = new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: ["1","2","3","4","5","6","7","8","9","10"],
-					datasets: [{
-						label: 'Nota',
-						data: avaliacoes?.vendas,
-						borderWidth: 2
-					}]
-				},
-				options: {
-					scales: { y: { beginAtZero: true } },
-					animation: {
-						animateRotate: true,
-						animateScale: true
-					}
-				}
-			});
+			await atualizarRelatorios("vendedores");
+			criarGrafico("line");
 		}
 		avalProdutosButton.onclick = async () => {
 			atualizarSelecionado(avalProdutosButton);
-			await atualizarRelatorios();
-			grafico?.destroy();
-			grafico = new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: ["1","2","3","4","5","6","7","8","9","10"],
-					datasets: [{
-						label: 'Nota',
-						data: avaliacoes?.produtos,
-						borderWidth: 2
-					}]
-				},
-				options: {
-					scales: { y: { beginAtZero: true } },
-					animation: {
-						animateRotate: true,
-						animateScale: true
-					}
-				}
-			});
+			await atualizarRelatorios("produtos");
+			criarGrafico("line");
 		}
 		avalAtendimentoButton.onclick = async () => {
 			atualizarSelecionado(avalAtendimentoButton);
-			await atualizarRelatorios();
+			await atualizarRelatorios("atendimento");
+			criarGrafico("bar");
+		}
+		
+		function criarGrafico(tipoGrafico)
+		{
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
-				type: 'bar',
+				type: tipoGrafico,
 				data: {
-					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					labels: avaliacoes?.labels,
 					datasets: [{
 						label: 'Nota',
-						data: avaliacoes?.atendimento,
+						data: avaliacoes?.notas,
 						borderWidth: 2
 					}]
 				},
