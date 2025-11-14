@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styledescricaoprodutos.css"/>
+    <title>Avaliações dos Produtos</title>
+
+
+</head>
+<body>
+
+    <h1>Avaliações dos Produtos</h1>
+
+    <div class="container" id="avaliacoes"></div>
+
+    <div id="erro"></div>
+
+    <script>
+        function classificarNota(nota) {
+            if (nota >= 8) return "nota-alta";
+            if (nota >= 5) return "nota-media";
+            return "nota-baixa";
+        }
+
+        async function carregarAvaliacoes() {
+            try {
+                const response = await fetch("/getAvaliacoesProdutos");
+                const data = await response.json();
+
+                if (!data.labels || !data.notas) {
+                    document.getElementById("erro").textContent =
+                        "Não foi possível carregar as avaliações.";
+                    return;
+                }
+
+                const container = document.getElementById("avaliacoes");
+
+                data.labels.forEach((descricao, index) => {
+                    const nota = data.notas[index];
+
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+
+                    card.innerHTML = `
+                        <div class="descricao">${descricao}</div>
+                        <div class="nota ${classificarNota(nota)}">Nota: ${nota}</div>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                document.getElementById("erro").textContent =
+                    "Erro ao carregar avaliações.";
+                console.error(error);
+            }
+        }
+
+        carregarAvaliacoes();
+    </script>
+
+</body>
+</html>
+

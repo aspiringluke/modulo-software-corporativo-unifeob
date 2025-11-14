@@ -1,0 +1,50 @@
+body {
+            font-family: Arial, sans-serif;
+            background: #f3f3f3;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 3px 7px rgba(0,0,0,0.15);
+        }
+
+        .descricao {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nota {
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .nota-alta { background: #4CAF50; color: white; }
+        .nota-media { background: #FFC107; color: black; }
+        .nota-baixa { background: #F44336; color: white; }
+
+        #erro {
+            margin-top: 20px;
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }

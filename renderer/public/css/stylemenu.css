@@ -151,3 +151,7 @@ body {
   outline: 3px solid var(--amarelo);
   outline-offset: -3px;
 }
+
+.menu-btn.produto {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 4h16v10H4V10zm4 2v6h2v-6H8zm4 0v6h2v-6h-2zm4 0v6h2v-6h-2z"/></svg>');
+}
