@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAvaliacoesAtendimento, getAvaliacoesProdutos, createAvaliacoes } from "../controllers/avaliacaoClientes.js";
+import { getAvaliacoesAtendimento, getAvaliacoesProdutos, createAvaliacoes, getAvaliacoesVendedores } from "../controllers/avaliacaoClientes.js";
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ router.get("/", (req,res) => {
 // router.get("/avaliacaoclientes", getAvaliacoes);
 router.get("/avaliacaoclientes/atendimento", getAvaliacoesAtendimento);
 router.get("/avaliacaoclientes/produtos", getAvaliacoesProdutos);
-// router.get("/avaliacaoclientes/vendedores", );
+router.get("/avaliacaoclientes/vendedores", getAvaliacoesVendedores);
 
 router.get("/nova_avaliacao", (req,res) => {
     res.render("nova_avaliacao");

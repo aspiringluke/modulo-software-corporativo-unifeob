@@ -29,15 +29,52 @@ export async function getAvaliacoesProdutos(req,res){
     const knex = conectar(req.session.usuario, senha);
 
     try {
-        const result = await knex("avaliacaocliente as a").select(["p.descricao", "a.nota"]).where("a.idproduto", "!=", null).join("produto as p", "p.idproduto", "a.idproduto");
-        
-        res.status(200).json({"labels": result.descricao, "notas": result.nota})
+        const result = await knex("avaliacaocliente as a")
+            .select("p.descricao")
+            .join("produto as p", "p.idproduto", "=", "a.idproduto")
+            .avg("a.nota as notas")
+            .groupBy("p.descricao")
+            .orderBy("notas", "desc");
+
+        const descricoes=[], notas=[];
+
+        result.forEach(r => {
+            descricoes.push(r.descricao);
+            notas.push(r.notas);
+        })
+
+        res.status(200).json({"labels": descricoes, "notas": notas})
     } catch (error) {
         console.log(error);
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     }
 }
-export async function getAvaliacoesVendedores(req,res){}
+
+export async function getAvaliacoesVendedores(req,res){
+    const senha = await lerCredenciais(req.session.usuario);
+    const knex = conectar(req.session.usuario, senha);
+
+    try {
+        const result = await knex("avaliacaocliente as a")
+            .select("v.nome")
+            .join("vendedor as v", "v.idvendedor", "=", "a.idvendedor")
+            .avg("a.nota as notas")
+            .groupBy("v.nome")
+            .orderBy("notas", "desc");
+
+        const nomes=[], notas=[];
+
+        result.forEach(r => {
+            nomes.push(r.nome);
+            notas.push(r.notas);
+        })
+
+        res.status(200).json({"labels": nomes, "notas": notas})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
+    }
+}
 
 
 export async function createAvaliacoes(req, res)
