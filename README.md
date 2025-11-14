@@ -62,6 +62,7 @@ Ao estudar o funcionamento do Linux, aprendemos também sobre os sistemas de có
 O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas para o teste e manutenção de ambientes virtuais, mas também para o entendimento mais profundo do funcionamento do software, aprimorando a autonomia e a capacidade técnica da equipe no desenvolvimento de aplicações multiplataforma.
 
 ## 🧭 Como acessar o repositório
+
 1. 📂 **Acesso ao Repositório**
 
     - Para clonar o repositório localmente, utilize o comando:
@@ -190,4 +191,3 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
-
