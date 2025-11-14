@@ -84,10 +84,10 @@
 			}
 		}
 
-		async function atualizarRelatorios(){
+		async function atualizarRelatorios(categoria){
 			const preElem = document.getElementById("teste");
 
-			const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
+			const result = await fetch(`http://localhost:4040/relatorios/avaliacaoclientes/${categoria}`);
 			const data = await result.json();
 			
 			avaliacoes = data;
@@ -118,15 +118,15 @@
 		}
 		avalProdutosButton.onclick = async () => {
 			atualizarSelecionado(avalProdutosButton);
-			await atualizarRelatorios();
+			await atualizarRelatorios("produtos");
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
 				data: {
-					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					labels: labels,
 					datasets: [{
 						label: 'Nota',
-						data: avaliacoes?.produtos,
+						data: avaliacoes?.notas,
 						borderWidth: 2
 					}]
 				},
@@ -141,15 +141,15 @@
 		}
 		avalAtendimentoButton.onclick = async () => {
 			atualizarSelecionado(avalAtendimentoButton);
-			await atualizarRelatorios();
+			await atualizarRelatorios("atendimento");
 			grafico?.destroy();
 			grafico = new Chart(ctx, {
 				type: 'bar',
 				data: {
-					labels: ["1","2","3","4","5","6","7","8","9","10"],
+					labels: avaliacoes?.labels,
 					datasets: [{
 						label: 'Nota',
-						data: avaliacoes?.atendimento,
+						data: avaliacoes?.notas,
 						borderWidth: 2
 					}]
 				},
