@@ -76,7 +76,7 @@ Ao estudar o funcionamento do Linux, aprendemos também sobre os sistemas de có
 O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas para o teste e manutenção de ambientes virtuais, mas também para o entendimento mais profundo do funcionamento do software, aprimorando a autonomia e a capacidade técnica da equipe no desenvolvimento de aplicações multiplataforma.
 
 ## 📁 Arquitetura da Aplicação
-1. ### Estrutura das pastas
+1. **Estrutura das pastas**
     ```
     modulo-software-corporativo-unifeob/
     ├── docs/
@@ -143,7 +143,8 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
     ├── preload.js
     └── README.md
     ```
-2. ### Módulos utilizados
+2. **Módulos utilizados**
+   
     2a. devDependecies `npm i --save-dev`
 
         - EJS: 3.1.10
@@ -164,7 +165,8 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
         - pg: 8.16.3
 
-3. ### Fluxo geral
+4. **Fluxo geral**
+   
     Coming sonn...
     
 ## 🧭 Como acessar o repositório
@@ -297,5 +299,6 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
 
