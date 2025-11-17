@@ -5,6 +5,8 @@ import path  from 'path';
 import express from 'express';
 import session from 'express-session';
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import yaml from "yamljs";
 
 // internal
 import router from "./routers/router.js";
@@ -25,6 +27,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }))
+
+const swaggerDocument = yaml.load(path.join(import.meta.dirname, '../docs/openapi.yaml'));
+app.use('/docsAPI', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', router);
 
