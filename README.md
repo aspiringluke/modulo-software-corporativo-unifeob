@@ -1,7 +1,7 @@
 # 💻 Desenvolvimento de Software Corporativo
 
 <div align="right">
-    <img align="right" src= "readme-images/logo-unifeob.png" alt= "logo da Unifeob" width="250"/>
+    <img align="right" src="readme-images/logo-unifeob.png" alt="logo da Unifeob" width="250"/>
 </div>
 
 4º Semestre do curso de Ciência da Computação
@@ -165,9 +165,9 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
         - pg: 8.16.3
 
-4. **Fluxo geral**
-   
-    Coming sonn...
+
+## Fluxo geral
+![Fluxo de Dados PI](readme-images/fluxoDadosPI.png)
     
 ## 🧭 Como acessar o repositório
 
@@ -299,6 +299,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
 
 
