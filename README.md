@@ -1,6 +1,6 @@
 # 💻 Desenvolvimento de Software Corporativo
 
-<div align= "right">
+<div align="right">
     <img align="right" src= "readme-images/logo-unifeob.png" alt= "logo da Unifeob" width="250"/>
 </div>
 
@@ -13,6 +13,16 @@ UNIFEOB
 - José Carlos Pereira Neto
 - Lucas Paulino Gomes
 - Thierry Antonello Pengo
+- 
+## 📚 Sumário
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Empresa beneficiada](#-empresa-beneficiada)
+- [Estrutura de Dados](#-estrutura-de-dados)
+- [Desenvolvimento de Software Corporativo - Aplicação Electron](#-desenvolvimento-de-software-corporativo---aplicação-electron)
+- [Segurança e Auditoria](#-segurança-e-auditoria)
+- [Sistemas Operacionais](#%EF%B8%8F-sistemas-operacionais)
+- [Arquitetura da Aplicação](#-arquitetura-da-aplicação)
+- [Como acessar o repositório](#-como-acessar-o-repositório)
 
 ## 📦 Sobre o projeto
 
@@ -37,7 +47,7 @@ Neste módulo, aprendemos a criar diferentes tipos de arranjos de dados, engloba
 
 No projeto de nossa equipe, chegou-se à conclusão de que a implementação de alguma dessas estruturas seria inviável para a arquitetura e as funcionalidades planejadas pelo grupo, considerando as necessidades da empresa beneficiada.
 
-### ⚡Desenvolvimento de Software Corporativo - Aplicação Electron
+### ⚡ Desenvolvimento de Software Corporativo - Aplicação Electron
 
 Neste módulo, aprendemos a utilizar o Electron integrado com o framework web minimalista Express e o uso do HTML dinâmico proporcionado pelo EJS para desenvolver uma aplicação desktop moderna, modular e de fácil manutenção. Essa integração possibilitou a criação de interfaces interativas e responsivas, além de permitir a comunicação eficiente entre o front-end e o back-end da aplicação. Com isso, foi possível estruturar o sistema de forma organizada, garantindo segurança, desempenho e escalabilidade. Além disso, o uso dessas tecnologias facilitou a manipulação de dados em tempo real e a geração de relatórios dinâmicos dentro da própria aplicação.
 
@@ -65,6 +75,98 @@ Essa prática permite compreender melhor as particularidades de cada sistema ope
 Ao estudar o funcionamento do Linux, aprendemos também sobre os sistemas de código aberto (open source) e suas diversas distribuições, que em sua maioria não possuem interface gráfica e exigem o uso direto do terminal. Essa experiência foi fundamental para compreender a estrutura interna de um sistema operacional, os princípios de administração de sistemas e a execução de comandos para navegação, manipulação de arquivos e controle de processos.
 O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas para o teste e manutenção de ambientes virtuais, mas também para o entendimento mais profundo do funcionamento do software, aprimorando a autonomia e a capacidade técnica da equipe no desenvolvimento de aplicações multiplataforma.
 
+## 📁 Arquitetura da Aplicação
+1. ### Estrutura das pastas
+    ```
+    modulo-software-corporativo-unifeob/
+    ├── docs/
+    │   ├── insertsTeste.sql
+    │   ├── README.md
+    │   ├── scriptLogAuditoria.sql
+    │   ├── scriptPI-PostgreSQLv1111.sql
+    │   └── scriptTriggersAuditoria.sql
+    ├── node_modules
+    ├── readme-images/
+    │   └── logo_unifeob.png
+    ├── renderer/
+    │   ├── public/
+    │   │   ├── assets/
+    │   │   │   └── Logo_Argenzio.png
+    │   │   ├── css/
+    │   │   │   ├── styledescricaoprodutos.css
+    │   │   │   ├── stylelog.css
+    │   │   │   ├── stylelogin.css
+    │   │   │   ├── stylemenu.css
+    │   │   │   ├── stylenova_avaliacao.css
+    │   │   │   └── stylerelatorios.css
+    │   │   └── js/
+    │   │       ├── loginScript.js
+    │   │       ├── menu-active.js
+    │   │       └── relatoriosScript.js
+    │   └── view/
+    │       ├── auditoria.ejs
+    │       ├── descricaoProduto.ejs
+    │       ├── login.ejs
+    │       ├── nova_avaliacao.ejs
+    │       ├── relatorios.ejs
+    │       └── resumos.ejs
+    ├── server/
+    │   ├── config/
+    │   │   └── connection.js
+    │   ├── controllers/
+    │   │   ├── auditoria.js
+    │   │   ├── avaliacaoClientes.js
+    │   │   ├── login.js
+    │   │   ├── produtos.js
+    │   │   ├── secureStorage.js
+    │   │   └── vendedores.js
+    │   ├── middlewares/
+    │   │   └── checkRole.js
+    │   ├── models/
+    │   │   └── role.js
+    │   ├── routers/
+    │   │   ├── auditoria.js
+    │   │   ├── login.js
+    │   │   ├── produtos.js
+    │   │   ├── relatorios.js
+    │   │   ├── resumos.js
+    │   │   ├── router.js
+    │   │   └── vendedores.js
+    │   ├── services/
+    │   │   └── crypto.js
+    │   └── app.js
+    ├── .env
+    ├── .gitignore
+    ├── main.js
+    ├── package-lock.json
+    ├── package.json
+    ├── preload.js
+    └── README.md
+    ```
+2. ### Módulos utilizados
+    2a. devDependecies `npm i --save-dev`
+
+        - EJS: 3.1.10
+
+        - electron: 37.8.0
+
+        - express: 5.1.0
+
+        - express-session: 1.18.2
+
+    2b. dependences `npm i --save`
+
+        - dotenv: 17.2.3
+
+        - keytar: 7.9.0
+
+        - knex: 3.1.0
+
+        - pg: 8.16.3
+
+3. ### Fluxo geral
+    Coming sonn...
+    
 ## 🧭 Como acessar o repositório
 
 1. 📂 **Acesso ao Repositório**
@@ -195,4 +297,5 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
