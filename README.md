@@ -13,7 +13,7 @@ UNIFEOB
 - José Carlos Pereira Neto
 - Lucas Paulino Gomes
 - Thierry Antonello Pengo
-- 
+
 ## 📚 Sumário
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Empresa beneficiada](#-empresa-beneficiada)
@@ -313,6 +313,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
 
 
