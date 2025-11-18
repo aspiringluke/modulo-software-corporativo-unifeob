@@ -39,7 +39,7 @@ O projeto integrado deste semestre visa ao desenvolvimento de uma aplicação de
 ### 🏢 Empresa beneficiada
 
 A empresa beneficiada com o desenvolvimento deste projeto é a Laticínios Trevo Casa Branca LTDA, mais conhecida como Argenzio.
-O projeto consiste na criação de um sistema corporativo de mostragem de relatórios referentes ao rendimento das vendas, desempenho dos produtos e dos vendedores e avaliações dos clientes, com o objetivo de obter insights valiosos que auxiliem na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
+O projeto consiste na criação de um sistema corporativo de mostragem de relatórios referentes ao rendimento das vendas, desempenho dos produtos e dos vendedores e avaliações dos clientes. Essas avaliações incluem uma nota atribuída (de 0 a 10) e um comentário descritivo, permitindo identificar percepções mais detalhadas sobre atendimento, produtos e vendas, com o objetivo de obter insights valiosos que auxiliem na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
 
 ### 🧩 Estrutura de Dados
 
@@ -299,6 +299,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
 
 
