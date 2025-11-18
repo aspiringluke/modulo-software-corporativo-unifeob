@@ -25,26 +25,40 @@
 
         async function carregarAvaliacoes() {
             try {
-                const response = await fetch("/getAvaliacoesProdutos");
+                // const response = await fetch("/getAvaliacoesProdutos");
+                const response = await fetch("http://localhost:4040/relatorios/avaliacaoclientes/produtos?contexto=descricoes");
                 const data = await response.json();
+                
+                console.log(data.labels);
 
-                if (!data.labels || !data.notas) {
+                if (!data) {
                     document.getElementById("erro").textContent =
                         "Não foi possível carregar as avaliações.";
                     return;
                 }
 
                 const container = document.getElementById("avaliacoes");
-
-                data.labels.forEach((descricao, index) => {
-                    const nota = data.notas[index];
+                console.log(data);
+                data.idAvaliacao.forEach((a, index) => {
+                    console.log(a);
+                    console.log(index);
+                    const idAvaliacao = a;
+                    const nota = data.nota[index];
+                    const nomeProduto = data.nomeProduto[index];
+                    const descricao = data.descricao[index];
+                    const nomeCliente = data.nomeCliente[index];
+                    const dataavaliacao = data.data[index];
 
                     const card = document.createElement("div");
                     card.classList.add("card");
 
                     card.innerHTML = `
-                        <div class="descricao">${descricao}</div>
+                        <div class="idAvaliacao">${idAvaliacao}</div>
                         <div class="nota ${classificarNota(nota)}">Nota: ${nota}</div>
+                        <div class="nomeProduto">${nomeProduto}</div>
+                        <div class="descricao">${descricao}</div>
+                        <div class="nomeCliente">${nomeCliente}</div>
+                        <div class="data">${data}</div>
                     `;
 
                     container.appendChild(card);
