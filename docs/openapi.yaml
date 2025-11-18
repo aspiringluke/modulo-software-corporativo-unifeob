@@ -137,7 +137,7 @@ paths:
           description: Retorno de um array contendo os IDs e os nomes de todos os produtos cadastrados
         '500':
           description: Erro interno de conexão com o banco
-  /produtos/descricoes:
+  /descricoes/produtos:
     get:
       summary: Renderiza página de descrições dos produtos
       description: A página de descrição dos produtos é renderizada com os detalhes de todos os produtos cadastrados no banco
