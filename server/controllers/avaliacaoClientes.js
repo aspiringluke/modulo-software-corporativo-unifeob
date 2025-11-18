@@ -29,21 +29,59 @@ export async function getAvaliacoesProdutos(req,res){
     const knex = conectar(req.session.usuario, senha);
 
     try {
-        const result = await knex("avaliacaocliente as a")
-            .select("p.descricao")
-            .join("produto as p", "p.idproduto", "=", "a.idproduto")
-            .avg("a.nota as notas")
-            .groupBy("p.descricao")
-            .orderBy("notas", "desc");
+        // o contexto seleciona quais dados enviar para o front
+        // grafico -> labels e notas
+        // descricoes -> todos os dados
+        if(req.query.contexto === "grafico")
+        {
+            const result = await knex("avaliacaocliente as a")
+                .select("p.descricao")
+                .join("produto as p", "p.idproduto", "=", "a.idproduto")
+                .avg("a.nota as notas")
+                .groupBy("p.descricao")
+                .orderBy("notas", "desc");
 
-        const descricoes=[], notas=[];
+            const descricoes=[], notas=[];
 
-        result.forEach(r => {
-            descricoes.push(r.descricao);
-            notas.push(r.notas);
-        })
-
-        res.status(200).json({"labels": descricoes, "notas": notas})
+            result.forEach(r => {
+                descricoes.push(r.descricao);
+                notas.push(r.notas);
+            })
+            res.status(200).json({"labels": descricoes, "notas": notas})
+        }
+        else if(req.query.contexto === "descricoes")
+        {
+            const results = await knex("avaliacaocliente as a")
+                .select(["a.idavaliacao","a.nota","p.descricao as nomeProduto","a.descricao","c.nome","a.dataavaliacao"])
+                .join("produto as p", "a.idproduto", "=", "p.idproduto")
+                .join("cliente as c", "a.idcliente", "=", "c.idcliente")
+                .orderBy("p.descricao", "asc");
+            
+            console.log(results);
+            
+            const idAvaliacao=[], nota=[], nomeProduto=[], descricao=[], nomeCliente=[], data=[];
+            for(const r of results)
+            {
+                idAvaliacao.push(r.idavaliacao);
+                nota.push(r.nota);
+                nomeProduto.push(r.nomeProduto);
+                descricao.push(r.descricao);
+                nomeCliente.push(r.nome);
+                data.push(r.dataavaliacao);
+            }
+            res.status(200).json({
+                "idAvaliacao": idAvaliacao,
+                "nota": nota,
+                "nomeProduto": nomeProduto,
+                "descricao": descricao,
+                "nomeCliente": nomeCliente,
+                "data": data
+            });
+        }
+        else
+        {
+            res.status(400).json({"error": "Parâmetros inválidos"})
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
@@ -56,11 +94,11 @@ export async function getAvaliacoesVendedores(req,res){
 
     try {
         const result = await knex("avaliacaocliente as a")
-            .select("v.nome")
-            .join("vendedor as v", "v.idvendedor", "=", "a.idvendedor")
-            .avg("a.nota as notas")
-            .groupBy("v.nome")
-            .orderBy("notas", "desc");
+        .select("v.nome")
+        .join("vendedor as v", "v.idvendedor", "=", "a.idvendedor")
+        .avg("a.nota as notas")
+        .groupBy("v.nome")
+        .orderBy("notas", "desc");
 
         const nomes=[], notas=[];
 
