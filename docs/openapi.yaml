@@ -137,4 +137,13 @@ paths:
           description: Retorno de um array contendo os IDs e os nomes de todos os produtos cadastrados
         '500':
           description: Erro interno de conexão com o banco
+  /produtos/descricoes:
+    get:
+      summary: Renderiza página de descrições dos produtos
+      description: A página de descrição dos produtos é renderizada com os detalhes de todos os produtos cadastrados no banco
+      responses:
+        '200':
+          description: Retorno de um array contendo ID da avaliação, nota avaliada, nome do produto, descricao do produto, nome do cliente e data da avaliação
+        '500':
+          description: Erro interno de conexão com o banco
 
