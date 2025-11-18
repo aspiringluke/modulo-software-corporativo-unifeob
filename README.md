@@ -164,6 +164,10 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         - knex: 3.1.0
 
         - pg: 8.16.3
+   
+        - swagger-ui-express: 5.0.1
+   
+        - yamljs: 0.3.0
 
 
 ## Fluxo geral
@@ -242,6 +246,16 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         npm i pg --save
         ```
 
+        - swagger:
+        ```
+        npm i swagger-ui-express --save
+        ```
+    
+       - yamljs:
+       ```
+       npm i yamljs --save
+       ```
+
 
 4. 💻 **Execução da Aplicação em Ambiente de Desenvolvimento**
 
@@ -299,6 +313,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
 
 
 
