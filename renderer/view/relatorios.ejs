@@ -26,10 +26,8 @@
 			<% if (!roles.includes('atendente')) { %>
 				<a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
 			<% } %>
-			<a href="/config" class="menu-btn settings" aria-label="Configurações" title="Configurações"></a>
-			<!-- <a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Rendimento"></a> -->
 			<a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Avaliações"></a>
-			<a href="/descricaoProdutos" class="menu-btn produto" aria-label="Descrição dos Produtos" title="Descrição dos Produtos"></a>
+			<a href="/descricoes/produtos" class="menu-btn produto" aria-label="Descrição dos Produtos" title="Descrição dos Produtos"></a>
 			</nav>
 		</div>
 	</aside>
@@ -79,7 +77,9 @@
 
 		async function atualizarRelatorios(categoria){
 			const preElem = document.getElementById("teste");
-			const result = await fetch(`http://localhost:4040/relatorios/avaliacaoclientes/${categoria}`);
+			const url = `http://localhost:4040/relatorios/avaliacaoclientes/${categoria + (categoria === "produtos" ? "?contexto=grafico" : "")}`
+			console.log(url);
+			const result = await fetch(url);
 			const data = await result.json();
 			avaliacoes = data;
 			
