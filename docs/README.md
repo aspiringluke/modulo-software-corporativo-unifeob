@@ -69,16 +69,18 @@ CREATE TABLE log_auditoria (
     horario TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 );
 ```
+
 A parte principal do sistema envolve o registro das avaliações feitas pelos clientes, para uso interno da empresa, sobre os vendedores, as vendas e o próprio atendimento.
 
 A tabela ```avaliacaoCliente``` contém, como atributos, a nota atribuída a cada aspecto (de 0 a 10), a data em que a avaliação foi registrada e a descrição fornecida pelo cliente sobre o respectivo aspecto.
 Além disso, ela contém as chaves estrangeiras que identificam o cliente que fez a avaliação, o produto avaliado (quando aplicável) e o vendedor avaliado (quando aplicável). Para indicar qual aspecto foi avaliado, utiliza-se o atributo tag, que especifica se a avaliação se refere a produtos, vendas ou atendimento.
 
-As tabelas de ```cliente```, ```produto```, ```venda``` e ```vendedor``` contém as informações ...
+As tabelas de ```cliente```, ```produto```, ```venda``` e ```vendedor``` contêm os atributos essenciais que garantem a identificação própria de cada registro, permitindo a geração de insights consistentes a partir das relações entre eles.
 
-A tabela ```contexto``` ...
+A tabela ```contexto``` é utilizada na lógica interna do banco e do sistema para diferenciar qual tipo de gráfico deve ser atualizado: avaliações ou rendimento.
 
 A tabela ```log_auditoria``` é utilizada para registrar as ações de cada usuário no sistema. Seus atributos indicam qual tabela foi modificada, o tipo de operação realizada, o registro antigo antes da modificação (em operações de UPDATE e DELETE, sendo nulo para inserções), o registro novo após a modificação (em operações de INSERT e UPDATE, sendo nulo para remoções), o usuário que realizou a alteração e a data e hora em que a modificação ocorreu.
+
 
 ```sql
 -- Criação dos papéis de usuário
@@ -165,3 +167,4 @@ AFTER INSERT OR UPDATE OR DELETE ON vendedor
 FOR EACH ROW
 EXECUTE FUNCTION auditoria();
 ```
+
