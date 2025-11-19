@@ -23,6 +23,8 @@ UNIFEOB
 - [Sistemas Operacionais](#%EF%B8%8F-sistemas-operacionais)
 - [Arquitetura da Aplicação](#-arquitetura-da-aplicação)
 - [Como acessar o repositório](#-como-acessar-o-repositório)
+- [Fluxo Geral](#-fluxo-geral)
+- [Exemplo de Uso](#-exemplo-de-uso)
 
 ## 📦 Sobre o projeto
 
@@ -80,14 +82,27 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
     ```
     modulo-software-corporativo-unifeob/
     ├── docs/
+    │   ├── images/
+    │   │   ├── docsApiSwagger.png
+    │   │   └── sistema_argenzio.png
     │   ├── insertsTeste.sql
+    │   ├── modeloLogicov1911.pgerd
+    │   ├── openapi.yaml
     │   ├── README.md
     │   ├── scriptLogAuditoria.sql
     │   ├── scriptPI-PostgreSQLv1111.sql
     │   └── scriptTriggersAuditoria.sql
     ├── node_modules
     ├── readme-images/
-    │   └── logo_unifeob.png
+    │   ├── fluxoDadosPI.png
+    │   ├── logo_unifeob.png
+    │   ├── telaAuditoria.png
+    │   ├── telaLogin.png
+    │   ├── telaNovaAvaliacao.png
+    │   ├── telaRelatorioAtendimentos.png
+    │   ├── telaRelatorioProdutos.png
+    │   ├── telaRelatorioVendas.png
+    │   └── telaResumos.png
     ├── renderer/
     │   ├── public/
     │   │   ├── assets/
@@ -126,6 +141,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
     │   │   └── role.js
     │   ├── routers/
     │   │   ├── auditoria.js
+    │   │   ├── descricoes.js
     │   │   ├── login.js
     │   │   ├── produtos.js
     │   │   ├── relatorios.js
@@ -170,7 +186,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         - yamljs: 0.3.0
 
 
-## Fluxo geral
+## 🔁 Fluxo geral
 ![Fluxo de Dados PI](readme-images/fluxoDadosPI.png)
     
 ## 🧭 Como acessar o repositório
@@ -314,7 +330,7 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
 - Sistema operacional compatível: Windows, Linux, macOS
 
-## Exemplo de Uso
+## 🎯 Exemplo de Uso
 
 Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenário real, apresentando o fluxo de interação do usuário, a visualização dos relatórios e o procedimento para registrar novas avaliações ou consultar informações já existentes.
 
@@ -376,3 +392,4 @@ Essa tela demonstra como o usuário pode não apenas visualizar relatórios, mas
 ![Tela de auditoria](readme-images/telaAuditoria.png)
 
 Por fim, o sistema também conta com a tela de Auditoria, onde são exibidos os registros de atividades realizadas pelos usuários. Essa funcionalidade é **exclusiva para o perfil de chefe**, garantindo que apenas quem possui permissão adequada possa acompanhar, revisar e monitorar as ações executadas dentro da aplicação.
+
