@@ -5,8 +5,10 @@ Essa seção está reservada para arquivos relacionados à fase inicial de plane
 - [Modelo lógico](#-modelo-lógico)
 - [Scripts SQL - Criação das tabelas e Gerenciamento de permissões](#-scripts-sql---criação-das-tabelas-e-gerenciamento-de-permissões)
 - [Scripts SQL - Lógica de auditoria](#-scripts-sql---lógica-de-auditoria)
+- [Documentação API](#documentação-da-api)
+
 ## 💡 Modelo lógico
-![Modelo lógico](sistema_argenzio.png)
+![Modelo lógico](images/sistema_argenzio.png)
 
 ## 🔓 Scripts SQL - Criação das tabelas e Gerenciamento de permissões
 
@@ -165,3 +167,9 @@ AFTER INSERT OR UPDATE OR DELETE ON vendedor
 FOR EACH ROW
 EXECUTE FUNCTION auditoria();
 ```
+
+## Documentação da API
+
+Para facilitar a visualização e o entendimento das operações disponíveis no sistema, a API foi documentada utilizando o Swagger. Essa ferramenta oferece uma interface interativa que exibe os endpoints, seus parâmetros, modelos de entrada e saída, além de permitir a execução de requisições diretamente pelo navegador.
+
+![Documentação em Swagger.io](images/docsApiSwagger.png)
