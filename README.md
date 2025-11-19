@@ -320,10 +320,9 @@ Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenári
 
 ![Tela de login](readme-images/telaLogin.png)
 
-<<<<<<< HEAD
 Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de resumos...
-=======
 
 
 
 >>>>>>> main
+
