@@ -40,8 +40,8 @@ O projeto integrado deste semestre visa ao desenvolvimento de uma aplicação de
 
 ### 🏢 Empresa beneficiada
 
-A empresa beneficiada com o desenvolvimento deste projeto é a Laticínios Trevo Casa Branca LTDA, mais conhecida como Argenzio.
-O projeto consiste na criação de um sistema corporativo de mostragem de relatórios referentes ao rendimento das vendas, desempenho dos produtos e dos vendedores e avaliações dos clientes. Essas avaliações incluem uma nota atribuída (de 0 a 10) e um comentário descritivo, permitindo identificar percepções mais detalhadas sobre atendimento, produtos e vendas, com o objetivo de obter insights valiosos que auxiliem na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
+A empresa beneficiada com o desenvolvimento deste projeto é a Laticínios Trevo Casa Branca LTDA, conhecida comercialmente como Argenzio. O sistema criado funciona, na prática, como uma solução de NPS (*Net Promoter Score*) adaptada ao contexto da empresa, permitindo avaliar a satisfação dos clientes a partir de notas de 0 a 10 e comentários descritivos. A plataforma organiza essas informações em relatórios sobre o rendimento das vendas, o desempenho dos produtos, o trabalho dos vendedores e a qualidade do atendimento. Assim como em um sistema de NPS, os dados coletados possibilitam identificar promotores, neutros e detratores, além de revelar percepções específicas que auxiliam na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
+
 
 ### 🧩 Estrutura de Dados
 
@@ -392,4 +392,5 @@ Essa tela demonstra como o usuário pode não apenas visualizar relatórios, mas
 ![Tela de auditoria](readme-images/telaAuditoria.png)
 
 Por fim, o sistema também conta com a tela de Auditoria, onde são exibidos os registros de atividades realizadas pelos usuários. Essa funcionalidade é **exclusiva para o perfil de chefe**, garantindo que apenas quem possui permissão adequada possa acompanhar, revisar e monitorar as ações executadas dentro da aplicação.
+
 
