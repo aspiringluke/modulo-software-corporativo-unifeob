@@ -16,7 +16,6 @@ router.use("/descricoes", descricoesRouter);
 router.use("/auditoria", auditoriaRouter);
 router.use("/vendedores", vendedorRouter);
 router.use("/produtos", produtoRouter);
-
 router.use("/", loginRouter);
 router.use("/login", loginRouter);
 
