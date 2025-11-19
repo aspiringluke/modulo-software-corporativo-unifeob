@@ -3,18 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styledescricaoprodutos.css"/>
+    <link rel="stylesheet" href="/css/stylemenu.css" />
+    <link rel="stylesheet" href="/css/styledescricaoprodutos.css">
+    <script defer src="/js/menu-active.js"></script>
     <title>Avaliações dos Produtos</title>
-
-
 </head>
 <body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <span class="user-name"><%= usuario %></span>
+                <span class="user-role"><%= roles %></span>
+            </div>
+        </div>
 
-    <h1>Avaliações dos Produtos</h1>
+        <div class="menu-wrapper">
+            <nav class="menu">
+            <% if (!roles.includes('atendente')) { %>
+                <a href="/auditoria" class="menu-btn clock" aria-label="Relógio" title="Auditoria"></a>
+            <% } %>
+            <a href="/relatorios" class="menu-btn stats" aria-label="Estatísticas" title="Avaliações"></a>
+            <a href="/descricoes/produtos" class="menu-btn produto" aria-label="Descrição dos Produtos" title="Descrição dos Produtos"></a>
+            </nav>
+        </div>
+    </aside>
 
-    <div class="container" id="avaliacoes"></div>
+    <main class="main-content">
+        <div class="mainContent-container">
+            <h1>Avaliações Recentes</h1>
 
-    <div id="erro"></div>
+            <div class="container" id="avaliacoes">
+                </div>
+
+            <div id="erro"></div>
+        </div>
+    </main>
 
     <script>
         function classificarNota(nota) {
@@ -23,57 +47,81 @@
             return "nota-baixa";
         }
 
+        // Função auxiliar para pegar iniciais do nome
+        function getIniciais(nome) {
+            if (!nome) return "?";
+            const partes = nome.split(' ');
+            if (partes.length === 1) return partes[0].charAt(0).toUpperCase();
+            return (partes[0].charAt(0) + partes[partes.length - 1].charAt(0)).toUpperCase();
+        }
+
         async function carregarAvaliacoes() {
+            const loadingEl = document.getElementById("avaliacoes");
+            loadingEl.innerHTML = '<p style="color:#666;">Carregando avaliações...</p>';
+
             try {
-                // const response = await fetch("/getAvaliacoesProdutos");
                 const response = await fetch("http://localhost:4040/relatorios/avaliacaoclientes/produtos?contexto=descricoes");
                 const data = await response.json();
                 
-                console.log(data.labels);
+                // Limpa msg de loading
+                loadingEl.innerHTML = '';
 
-                if (!data) {
-                    document.getElementById("erro").textContent =
-                        "Não foi possível carregar as avaliações.";
+                if (!data || !data.idAvaliacao) {
+                    document.getElementById("erro").textContent = "Nenhuma avaliação encontrada.";
                     return;
                 }
 
                 const container = document.getElementById("avaliacoes");
-                console.log(data);
-                data.idAvaliacao.forEach((a, index) => {
-                    console.log(a);
-                    console.log(index);
-                    const idAvaliacao = a;
+
+                data.idAvaliacao.forEach((id, index) => {
+                    const idAvaliacao = id;
                     const nota = data.nota[index];
-                    const nomeProduto = data.nomeProduto[index];
-                    const descricao = data.descricao[index];
-                    const nomeCliente = data.nomeCliente[index];
-                    const dataavaliacao = data.data[index];
+                    const nomeProduto = data.nomeProduto[index] || "Produto sem nome";
+                    const descricao = data.descricao[index] || "Sem descrição.";
+                    const nomeCliente = data.nomeCliente[index] || "Anônimo";
+                    
+                    // Formata data corretamente para dia/mês/ano
+                    const rawDate = data.data[index];
+                    const dataFormatada = rawDate ? new Date(rawDate).toLocaleDateString('pt-BR') : '--/--/----';
 
                     const card = document.createElement("div");
                     card.classList.add("card");
 
+                    // Estrutura do HTML do card renovada
                     card.innerHTML = `
-                        <div class="idAvaliacao">${idAvaliacao}</div>
-                        <div class="nota ${classificarNota(nota)}">Nota: ${nota}</div>
-                        <div class="nomeProduto">${nomeProduto}</div>
-                        <div class="descricao">${descricao}</div>
-                        <div class="nomeCliente">${nomeCliente}</div>
-                        <div class="data">${data}</div>
+                        <div class="id-badge">#${idAvaliacao}</div>
+                        
+                        <div class="card-header">
+                            <div class="nomeProduto">${nomeProduto}</div>
+                            <div class="nota ${classificarNota(nota)}">
+                                ${nota.toFixed(1)} ★
+                            </div>
+                        </div>
+
+                        <div class="descricao">
+                            "${descricao}"
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="cliente-info">
+                                <div class="avatar-circle">${getIniciais(nomeCliente)}</div>
+                                <div class="nomeCliente">${nomeCliente}</div>
+                            </div>
+                            <div class="data">${dataFormatada}</div>
+                        </div>
                     `;
 
                     container.appendChild(card);
                 });
 
             } catch (error) {
-                document.getElementById("erro").textContent =
-                    "Erro ao carregar avaliações.";
+                document.getElementById("avaliacoes").innerHTML = '';
+                document.getElementById("erro").textContent = "Erro de conexão ao carregar avaliações.";
                 console.error(error);
             }
         }
 
         carregarAvaliacoes();
     </script>
-
 </body>
 </html>
-
