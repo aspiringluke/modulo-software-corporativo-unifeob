@@ -304,6 +304,6 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 
 Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenário real, apresentando o fluxo de interação do usuário, a visualização dos relatórios e o procedimento para registrar novas avaliações ou consultar informações já existentes.
 
-![Tela de login](docs/telaLogin.png)
+![Tela de login](readme-images/telaLogin.png)
 
 Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de resumos...
