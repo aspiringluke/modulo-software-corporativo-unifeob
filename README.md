@@ -13,7 +13,7 @@ UNIFEOB
 - José Carlos Pereira Neto
 - Lucas Paulino Gomes
 - Thierry Antonello Pengo
-- 
+
 ## 📚 Sumário
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Empresa beneficiada](#-empresa-beneficiada)
@@ -164,6 +164,10 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         - knex: 3.1.0
 
         - pg: 8.16.3
+   
+        - swagger-ui-express: 5.0.1
+   
+        - yamljs: 0.3.0
 
 
 ## Fluxo geral
@@ -242,6 +246,16 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         npm i pg --save
         ```
 
+        - swagger:
+        ```
+        npm i swagger-ui-express --save
+        ```
+    
+       - yamljs:
+       ```
+       npm i yamljs --save
+       ```
+
 
 4. 💻 **Execução da Aplicação em Ambiente de Desenvolvimento**
 
@@ -306,4 +320,10 @@ Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenári
 
 ![Tela de login](readme-images/telaLogin.png)
 
+<<<<<<< HEAD
 Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de resumos...
+=======
+
+
+
+>>>>>>> main
