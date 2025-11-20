@@ -1,12 +1,120 @@
-"use strict";
+const titulo = document.getElementById("tituloRelatorio");
 
 const avalButton = document.getElementById("avaliacoes");
+const avalVendasButton = document.getElementById("avaliacoesVendas");
+const avalProdutosButton = document.getElementById("avaliacoesProdutos");
+const avalAtendimentoButton = document.getElementById("avaliacoesAtendimento");
 
-avalButton.onclick = async () => {
+const botoes = document.getElementsByClassName("botaoMudarRelatorio");
+const ctxMelhores = document.getElementById('melhores');
+const ctxPiores = document.getElementById('piores');
+
+let avaliacoes;
+let grafico=[];
+const BEST = 0, WORST = 1;
+
+async function atualizarRelatorios(categoria){
     const preElem = document.getElementById("teste");
-
-    const result = await fetch("http://localhost:4040/relatorios/avaliacaoclientes");
+    const url = `http://localhost:4040/relatorios/avaliacaoclientes/${categoria + (categoria === "produtos" ? "?contexto=grafico" : "")}`
+    const result = await fetch(url);
     const data = await result.json();
+    avaliacoes = data;
     
-    preElem.innerHTML = data;
+    titulo.textContent =
+        categoria === "atendimento" ? "Quantidade de notas por nota do atendimento"
+        : categoria === "vendedores" ? "Média das notas por vendedor"
+        : "Média das notas por produto";
+    
+    if(categoria === "atendimento")
+    {
+        document.getElementById("containerPiores").style.display = "none";
+        document.getElementById("containerMelhores").style.height = "520px";
+    }
+    else
+    {
+        document.getElementById("containerPiores").style.display = "";
+        document.getElementById("containerMelhores").style.height = "260px";
+        document.getElementById("containerPiores").style.height = "260px";
+    }
+}
+
+avalVendasButton.onclick = async () => {
+    atualizarSelecionado(avalVendasButton);
+    await atualizarRelatorios("vendedores");
+    criarGrafico("line", ctxMelhores, true, "vendedores");
+    criarGrafico("line", ctxPiores, false, "vendedores");
+}
+avalProdutosButton.onclick = async () => {
+    atualizarSelecionado(avalProdutosButton);
+    await atualizarRelatorios("produtos");
+    criarGrafico("line", ctxMelhores, true, "produtos");
+    criarGrafico("line", ctxPiores, false, "produtos");
+}
+avalAtendimentoButton.onclick = async () => {
+    atualizarSelecionado(avalAtendimentoButton);
+    await atualizarRelatorios("atendimento");
+    criarGrafico("bar", ctxMelhores, true, "atendimento");
+}
+
+function criarGrafico(tipoGrafico, ctx, ehMelhores, categoria)
+{
+    ehMelhores ? grafico[BEST]?.destroy() : null;
+    grafico[WORST]?.destroy();
+    grafico[ehMelhores ? BEST : WORST] = new Chart(ctx, {
+        type: tipoGrafico,
+        data: {
+            labels: ehMelhores ? avaliacoes?.labels : avaliacoes?.labels.toReversed(),
+            datasets: [{
+                label: 'Nota',
+                data: ehMelhores ? avaliacoes?.notas : avaliacoes?.notas.toReversed(),
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                x: { min: 0, max: 9},
+                y: { beginAtZero: true }
+            },
+            animation: { animateRotate: true, animateScale: true },
+            plugins: {
+                title: {
+                    display: true,
+                    text: !ehMelhores ? "Piores" : categoria !== "atendimento" ? "Melhores" : "Notas do Atendimento"
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                        modifierKey: null,
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x',
+                    },
+                }
+            },
+            elements: {
+                line: {
+                    backgroundColor: ehMelhores ? "#33ee55" : "#ee3355",
+                    borderColor: ehMelhores ? "#33ee55" : "#ee3355"
+                },
+                bar: { backgroundColor: "#33ee55" }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+}
+
+function atualizarSelecionado(btn)
+{
+    for(let i=0; i<botoes.length; i++)
+    { botoes[i].className = "botaoMudarRelatorio"; }
+
+    btn.className = "botaoMudarRelatorio selecionado";
 }
