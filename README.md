@@ -18,7 +18,7 @@ UNIFEOB
 
 O projeto integrado deste semestre visa ao desenvolvimento de uma aplicação desktop do tipo software corporativo, utilizando os conceitos e tecnologias aprendidos durante o módulo, para a criação de um programa que envolva:
 
-- **Estrutura de Dados**: pilhas, listas, filas, grafos e árvores hash;
+- **Estrutura de Dados**: o estudo de estruturas como pilhas, listas, filas, grafos e árvores hash é fundamental para a organização lógica e eficiente das informações dentro de um sistema. Cada estrutura possui características próprias que influenciam diretamente na forma como os dados são armazenados, acessados e manipulados. Além disso, a compreensão de conceitos de complexidade algorítmica — como os tempos de inserção, busca e remoção — permite escolher a estrutura mais adequada para cada problema, garantindo um desenvolvimento de código mais otimizado, escalável e com melhor desempenho na prática;
 
 - **Segurança e Auditoria**: criação de papéis de usuários com atribuição de permissões específicas para cada um, considerando o princípio do menor privilégio e restringindo ou permitindo as funcionalidades do sistema conforme a função. Além disso, a criação de registros de auditoria tem como finalidade manter o controle sobre as atividades de cada usuário no sistema e possibilitar a prevenção de ataques;
 
@@ -195,3 +195,4 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
