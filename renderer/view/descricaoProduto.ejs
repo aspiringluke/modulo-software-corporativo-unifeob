@@ -33,6 +33,25 @@
         <div class="mainContent-container">
             <h1>Avaliações Recentes</h1>
 
+            <div class="filtragem">
+                <select class="buttonsFiltragem" id="campoFiltro">
+                    <option value="id">ID da Avaliação</option>
+                    <option value="descricao">Conteúdo da descrição da avaliação</option>
+                    <option value="nota">Nota</option>
+                    <option value="produto">Nome do produto</option>
+                    <option value="cliente">Nome do cliente</option>
+                </select>
+                <select class="buttonsFiltragem" id="operadorFiltro">
+                    <option value="igual">=</option>
+                    <option value="maiorQue">&gt;</option>
+                    <option value="menorQue">&lt;</option>
+                    <option value="diferenteDe">≠</option>
+                    <option value="menorOuIgual">≤</option>
+                    <option value="maiorOuIgual">≥</option>
+                    <option value="pertence">∈</option>
+                </select>
+                <input class="buttonsFiltragem" id="valorFiltro" type="text"></input>
+            </div>
             <div class="container" id="avaliacoes">
                 </div>
 
@@ -41,13 +60,36 @@
     </main>
 
     <script>
+        let cards = [];
+
+        function filtrar()
+        {
+            // ler a expressão de filtragem
+            const campo = document.getElementById("campoFiltro");
+            const selectedCampo = campo.options[campo.selectedIndex].value;
+            const op = document.getElementById("operadorFiltro");
+            const valor = document.getElementById("valorFiltro");
+
+            // iterar sobre os cards
+            for(const card of cards)
+            {
+                let a = card.getElementById("idAvaliacao");
+                console.log(a);
+            }
+            // esconder aqueles que não se encaixam na expressão
+            // mostrar os que estiverem escondidos e se encaixarem na expressão
+            console.log(selectedCampo);
+        }
+
+        const valorFiltro = document.getElementById("valorFiltro");
+        valorFiltro.addEventListener("input", filtrar);
+
         function classificarNota(nota) {
             if (nota >= 8) return "nota-alta";
             if (nota >= 5) return "nota-media";
             return "nota-baixa";
         }
 
-        // Função auxiliar para pegar iniciais do nome
         function getIniciais(nome) {
             if (!nome) return "?";
             const partes = nome.split(' ');
@@ -63,7 +105,6 @@
                 const response = await fetch("http://localhost:4040/relatorios/avaliacaoclientes/produtos?contexto=descricoes");
                 const data = await response.json();
                 
-                // Limpa msg de loading
                 loadingEl.innerHTML = '';
 
                 if (!data || !data.idAvaliacao) {
@@ -80,16 +121,14 @@
                     const descricao = data.descricao[index] || "Sem descrição.";
                     const nomeCliente = data.nomeCliente[index] || "Anônimo";
                     
-                    // Formata data corretamente para dia/mês/ano
                     const rawDate = data.data[index];
                     const dataFormatada = rawDate ? new Date(rawDate).toLocaleDateString('pt-BR') : '--/--/----';
 
                     const card = document.createElement("div");
                     card.classList.add("card");
 
-                    // Estrutura do HTML do card renovada
                     card.innerHTML = `
-                        <div class="id-badge">#${idAvaliacao}</div>
+                        <div class="id-badge" id="idAvaliacao">#${idAvaliacao}</div>
                         
                         <div class="card-header">
                             <div class="nomeProduto">${nomeProduto}</div>
@@ -112,6 +151,7 @@
                     `;
 
                     container.appendChild(card);
+                    cards.push(card);
                 });
 
             } catch (error) {
