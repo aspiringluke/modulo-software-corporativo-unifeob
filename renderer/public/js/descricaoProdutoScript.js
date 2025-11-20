@@ -1,28 +1,70 @@
 let cards = [];
 
+document.getElementById("erro").style.display = "none";
+const campo = document.getElementById("campoFiltro");
+const op = document.getElementById("operadorFiltro");
+const valor = document.getElementById("valorFiltro");
+
+valor.addEventListener("input", filtrar);
+op.onchange = filtrar;
+campo.onchange = (e)=>{
+    if(e.target.value !== "idAvaliacao" && e.target.value !== "nota")
+        op.style.display = "none";
+    else
+        op.style.display = "";
+}
+
 function filtrar()
 {
     // ler a expressão de filtragem
-    const campo = document.getElementById("campoFiltro");
     const selectedCampo = campo.options[campo.selectedIndex].value;
-    const op = document.getElementById("operadorFiltro");
-    const valor = document.getElementById("valorFiltro");
+    const selectedOp = op.options[op.selectedIndex].value;
 
-    // iterar sobre os cards
-    for(const card of cards)
+    // não filtra se o valor estiver vazio
+    if(valor.value === "")
     {
-        let id = card.getAttribute("idAvaliacao");
-        console.log(id);
-        let nota = card.getAttribute("nota");
-        console.log(nota);
-        let nomeProduto = card.getAttribute("nomeProduto");
+        restoreDisplay();
+        return;
     }
-    // esconder aqueles que não se encaixam na expressão
-    // mostrar os que estiverem escondidos e se encaixarem na expressão
+    if(selectedCampo === "idAvaliacao" || selectedCampo === "nota")
+    {
+        // iterar sobre os cards
+        for(const card of cards)
+        {
+            let selCam = card.getAttribute(selectedCampo);
+            let val = valor.value.toString();
+            const result = eval(`${selCam} ${selectedOp} "${val}"`);
+            if(!result)
+                // esconder os que não se encaixarem
+                card.style.display = "none";
+            else
+                // mostrar os que estiverem escondidos e se encaixarem na expressão
+                card.style.display = "";
+        }
+    }
+    else
+    {
+        for(const card of cards)
+        {
+            const result = card.getAttribute(selectedCampo).includes(valor.value);
+            if(!result)
+                // esconder os que não se encaixarem
+                card.style.display = "none";
+            else
+                // mostrar os que estiverem escondidos e se encaixarem na expressão
+                card.style.display = "";
+        }
+    }
 }
 
-const valorFiltro = document.getElementById("valorFiltro");
-valorFiltro.addEventListener("input", filtrar);
+function restoreDisplay()
+{
+    for(const card of cards)
+    {
+        card.style.display = "";
+    }
+}
+
 
 function classificarNota(nota) {
     if (nota >= 8) return "nota-alta";
@@ -100,6 +142,7 @@ async function carregarAvaliacoes() {
 
     } catch (error) {
         document.getElementById("avaliacoes").innerHTML = '';
+        document.getElementById("erro").style.display = "";
         document.getElementById("erro").textContent = `Erro de conexão ao carregar avaliações: ${error}`;
     }
 }

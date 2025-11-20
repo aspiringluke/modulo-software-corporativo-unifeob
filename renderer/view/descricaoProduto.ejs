@@ -34,20 +34,21 @@
             <h1>Avaliações Recentes</h1>
 
             <div class="filtragem">
+                <h3>Filtros: </h3>
                 <select class="buttonsFiltragem" id="campoFiltro">
-                    <option value="id">ID da Avaliação</option>
+                    <option value="idAvaliacao">ID da Avaliação</option>
                     <option value="descricao">Conteúdo da descrição da avaliação</option>
                     <option value="nota">Nota</option>
-                    <option value="produto">Nome do produto</option>
-                    <option value="cliente">Nome do cliente</option>
+                    <option value="nomeProduto">Nome do produto</option>
+                    <option value="nomeCliente">Nome do cliente</option>
                 </select>
                 <select class="buttonsFiltragem" id="operadorFiltro">
-                    <option value="igual">=</option>
-                    <option value="maiorQue">&gt;</option>
-                    <option value="menorQue">&lt;</option>
-                    <option value="diferenteDe">≠</option>
-                    <option value="menorOuIgual">≤</option>
-                    <option value="maiorOuIgual">≥</option>
+                    <option value="==">=</option>
+                    <option value=">">&gt;</option>
+                    <option value="<">&lt;</option>
+                    <option value="!=">≠</option>
+                    <option value="<=">≤</option>
+                    <option value=">=">≥</option>
                     <option value="pertence">∈</option>
                 </select>
                 <input class="buttonsFiltragem" id="valorFiltro" type="text"></input>

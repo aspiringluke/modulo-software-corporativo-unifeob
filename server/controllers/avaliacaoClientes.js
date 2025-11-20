@@ -17,7 +17,6 @@ export async function getAvaliacoesAtendimento(req, res)
 
         res.status(200).json({ "labels": ["1","2","3","4","5","6","7","8","9","10"], "notas": Object.values(quantidadeNotasAtendimento) });
     } catch (error) {
-        console.log(error);
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     } finally {
         knex.destroy();
@@ -57,8 +56,6 @@ export async function getAvaliacoesProdutos(req,res){
                 .join("cliente as c", "a.idcliente", "=", "c.idcliente")
                 .orderBy("p.descricao", "asc");
             
-            console.log(results);
-            
             const idAvaliacao=[], nota=[], nomeProduto=[], descricao=[], nomeCliente=[], data=[];
             for(const r of results)
             {
@@ -83,7 +80,6 @@ export async function getAvaliacoesProdutos(req,res){
             res.status(400).json({"error": "Parâmetros inválidos"})
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     }
 }
@@ -109,7 +105,6 @@ export async function getAvaliacoesVendedores(req,res){
 
         res.status(200).json({"labels": nomes, "notas": notas})
     } catch (error) {
-        console.log(error);
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     }
 }
