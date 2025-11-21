@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: software-corporativo-desktop
+  version: 1.0.0
+  description: Projeto Integrado do módulo de Desenvolvimento de Software Corporativo UNIFEOB
+
+servers:
+  - url: http://localhost:4040
+
+paths:
+  /resumos:
+    get:
+      summary: Renderiza a página de resumos
+      description: Página principal carregada após autenticação do usuário em que está presente todas as guias do sistema.
+      responses:
+        '200': 
+          description: Página de resumos renderizada
+        '500':
+          description: Erro interno de conexão com o banco
+  /relatorios:
+    get:
+      summary: Renderiza a página de relatorios
+      description: Página que contém dados referentes às avaliações dos clientes referentes ás vendas, produtos e atendimento.
+      responses:
+        '200':
+          description: Página de relatórios renderizada
+        '500':
+          description: Erro interno de conexão com o banco
+  /avaliacaoclientes/atendimento:
+    get:
+      summary: Retorna todas as notas de avaliação referentes ao atendimento dos clientes
+      description: Retorno dos dados provenientes da consulta SQL que seleciona todas as notas de atendimento
+      responses:
+        '200':
+          description: Array em JSON com todos os rótulos (labels) — notas de 0 a 10 e seus respectivos valores armazenados no banco 
+        '500':
+          description: Erro interno de conexão com o banco
+  /avaliacaoclientes/produtos:
+    get:
+      summary: Retorna todas as notas de avaliação referentes aos produtos
+      description: Retorno dos dados provenientes da consulta SQL que seleciona todas as notas de produtos
+      responses:
+        '200':
+          description: Array em JSON com todos os rótulos (labels) — notas de 0 a 10 e seus respectivos valores armazenados no banco
+        '500':
+          description: Erro interno de conexão com o banco
+  /avaliacaoclientes/vendedores:
+    get:
+      summary: Retorna todas as notas de avaliação referentes aos vendedores
+      description: Retorno dos dados provenientes da consulta SQL que seleciona todas as notas de vendedores
+      responses:
+        '200':
+          description: Array em JSON com todos os rótulos (labels) — notas de 0 a 10 e seus respectivos valores armazenados no banco
+        '500':
+          description: Erro interno de conexão com o banco
+  /avaliacaoclientes/nova:
+    post:
+      summary: Criar uma nova avaliação 
+      description: Preenchimento de um formulário HTML contendo: ID do cliente, nota de avaliação, data e hora, descrição e o aspecto avaliado (vendas, produtos ou atendimento)
+      responses:
+        '201':
+          description: Inserção de uma nova avaliação na tabela avaliacaoClientes bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idAvaliacao:
+                    type: integer
+                    example: 1
+                  nota:
+                    type: integer
+                    example: 10
+                  dataAvaliacao:
+                    type: timestamp
+                    example: '2025-11-18 17:45:55'
+                  descricao:
+                    type: text,
+                    example: 'Muito bom o atendimento'
+                  tag:
+                    type: integer
+                    example: 3
+        '400':
+          description: Problema para executar a inserção devido a sintaxe mal-formatada
+        '500':
+          description: Erro interno de conexão com o banco
+  /auditoria:
+    get:
+      summary: Renderiza a página de auditoria, verificando se o usuário possui o papel de chefe
+      description: A página de auditoria é exibida e carregada apenas para usuários com o papel de chefe. Além disso, são retornados todos os registros da tabela de logs, filtrados do mais recente para o mais antigo.
+      responses:
+        '200':
+          description: Página de auditoria renderizada para usuário com papel de chefe com um array contendo todos os registros da tabela de logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idlog:
+                    type: integer
+                    example: 1
+                  tabela:
+                    type: text
+                    example: "produto"
+                  operacao:
+                    type: text
+                    example: "INSERT"
+                  registro_antigo:
+                    type: jsonb
+                    example: NULL
+                  registro_novo:
+                    type: jsonb
+                    example: {"idproduto": 1, "descricao": "Mussarela Aquila", "valorunitario": 36.00}
+                  usuario:
+                    type: varchar(45)
+                    example: "chefeteste"
+                  horario:
+                    type: timestamp
+                    example: '2025-11-18 17:45:55'
+        '500':
+          description: Erro interno de conexão com o banco
+  /vendedores:
+    get:
+      summary: Retornar todos os vendedores registrados
+      description: Retorno dos dados provenientes da consulta SQL que seleciona o ID e nome de todos os vendedores da respectiva tabela
+      responses:
+        '200':
+          description: Retorno de um array contendo os IDs e os nomes de todos os vendedores cadastrados
+        '500':
+          description: Erro interno de conexão com o banco
+  /produtos:
+    get:
+      summary: Retornar todos os produtos registrados
+      description: Retorno dos dados provenientes da consulta SQL que seleciona o ID e nome de todos os produtos da respectiva tabela
+      responses:
+        '200':
+          description: Retorno de um array contendo os IDs e os nomes de todos os produtos cadastrados
+        '500':
+          description: Erro interno de conexão com o banco
+  /descricoes/produtos:
+    get:
+      summary: Renderiza página de descrições dos produtos
+      description: A página de descrição dos produtos é renderizada com os detalhes de todos os produtos cadastrados no banco
+      responses:
+        '200':
+          description: Retorno de um array contendo ID da avaliação, nota avaliada, nome do produto, descricao do produto, nome do cliente e data da avaliação
+        '500':
+          description: Erro interno de conexão com o banco
+

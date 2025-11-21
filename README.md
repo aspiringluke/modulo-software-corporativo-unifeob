@@ -1,7 +1,7 @@
 # 💻 Desenvolvimento de Software Corporativo
 
-<div align= "right">
-    <img align="right" src= "readme-images/logo-unifeob.png" alt= "logo da Unifeob" width="250"/>
+<div align="right">
+    <img align="right" src="readme-images/logo-unifeob.png" alt="logo da Unifeob" width="250"/>
 </div>
 
 4º Semestre do curso de Ciência da Computação
@@ -13,6 +13,18 @@ UNIFEOB
 - José Carlos Pereira Neto
 - Lucas Paulino Gomes
 - Thierry Antonello Pengo
+
+## 📚 Sumário
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Empresa beneficiada](#-empresa-beneficiada)
+- [Estrutura de Dados](#-estrutura-de-dados)
+- [Desenvolvimento de Software Corporativo - Aplicação Electron](#-desenvolvimento-de-software-corporativo---aplicação-electron)
+- [Segurança e Auditoria](#-segurança-e-auditoria)
+- [Sistemas Operacionais](#%EF%B8%8F-sistemas-operacionais)
+- [Arquitetura da Aplicação](#-arquitetura-da-aplicação)
+- [Como acessar o repositório](#-como-acessar-o-repositório)
+- [Fluxo Geral](#-fluxo-geral)
+- [Exemplo de Uso](#-exemplo-de-uso)
 
 ## 📦 Sobre o projeto
 
@@ -28,8 +40,8 @@ O projeto integrado deste semestre visa ao desenvolvimento de uma aplicação de
 
 ### 🏢 Empresa beneficiada
 
-A empresa beneficiada com o desenvolvimento deste projeto é a Laticínios Trevo Casa Branca LTDA, mais conhecida como Argenzio.
-O projeto consiste na criação de um sistema corporativo de mostragem de relatórios referentes ao rendimento das vendas, desempenho dos produtos e dos vendedores e avaliações dos clientes, com o objetivo de obter insights valiosos que auxiliem na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
+A empresa beneficiada com o desenvolvimento deste projeto é a Laticínios Trevo Casa Branca LTDA, conhecida comercialmente como Argenzio. O sistema criado funciona, na prática, como uma solução de NPS (*Net Promoter Score*) adaptada ao contexto da empresa, permitindo avaliar a satisfação dos clientes a partir de notas de 0 a 10 e comentários descritivos. A plataforma organiza essas informações em relatórios sobre o rendimento das vendas, o desempenho dos produtos, o trabalho dos vendedores e a qualidade do atendimento. Assim como em um sistema de NPS, os dados coletados possibilitam identificar promotores, neutros e detratores, além de revelar percepções específicas que auxiliam na tomada de decisões estratégicas e na melhoria contínua dos processos internos.
+
 
 ### 🧩 Estrutura de Dados
 
@@ -37,7 +49,7 @@ Neste módulo, aprendemos a criar diferentes tipos de arranjos de dados, engloba
 
 No projeto de nossa equipe, chegou-se à conclusão de que a implementação de alguma dessas estruturas seria inviável para a arquitetura e as funcionalidades planejadas pelo grupo, considerando as necessidades da empresa beneficiada.
 
-### ⚡Desenvolvimento de Software Corporativo - Aplicação Electron
+### ⚡ Desenvolvimento de Software Corporativo - Aplicação Electron
 
 Neste módulo, aprendemos a utilizar o Electron integrado com o framework web minimalista Express e o uso do HTML dinâmico proporcionado pelo EJS para desenvolver uma aplicação desktop moderna, modular e de fácil manutenção. Essa integração possibilitou a criação de interfaces interativas e responsivas, além de permitir a comunicação eficiente entre o front-end e o back-end da aplicação. Com isso, foi possível estruturar o sistema de forma organizada, garantindo segurança, desempenho e escalabilidade. Além disso, o uso dessas tecnologias facilitou a manipulação de dados em tempo real e a geração de relatórios dinâmicos dentro da própria aplicação.
 
@@ -65,6 +77,118 @@ Essa prática permite compreender melhor as particularidades de cada sistema ope
 Ao estudar o funcionamento do Linux, aprendemos também sobre os sistemas de código aberto (open source) e suas diversas distribuições, que em sua maioria não possuem interface gráfica e exigem o uso direto do terminal. Essa experiência foi fundamental para compreender a estrutura interna de um sistema operacional, os princípios de administração de sistemas e a execução de comandos para navegação, manipulação de arquivos e controle de processos.
 O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas para o teste e manutenção de ambientes virtuais, mas também para o entendimento mais profundo do funcionamento do software, aprimorando a autonomia e a capacidade técnica da equipe no desenvolvimento de aplicações multiplataforma.
 
+## 📁 Arquitetura da Aplicação
+1. **Estrutura das pastas**
+    ```
+    modulo-software-corporativo-unifeob/
+    ├── docs/
+    │   ├── images/
+    │   │   ├── docsApiSwagger.png
+    │   │   └── sistema_argenzio.png
+    │   ├── insertsTeste.sql
+    │   ├── modeloLogicov1911.pgerd
+    │   ├── openapi.yaml
+    │   ├── README.md
+    │   ├── scriptLogAuditoria.sql
+    │   ├── scriptPI-PostgreSQLv1111.sql
+    │   └── scriptTriggersAuditoria.sql
+    ├── node_modules
+    ├── readme-images/
+    │   ├── fluxoDadosPI.png
+    │   ├── logo_unifeob.png
+    │   ├── telaAuditoria.png
+    │   ├── telaLogin.png
+    │   ├── telaNovaAvaliacao.png
+    │   ├── telaRelatorioAtendimentos.png
+    │   ├── telaRelatorioProdutos.png
+    │   ├── telaRelatorioVendas.png
+    │   └── telaResumos.png
+    ├── renderer/
+    │   ├── public/
+    │   │   ├── assets/
+    │   │   │   └── Logo_Argenzio.png
+    │   │   ├── css/
+    │   │   │   ├── styledescricaoprodutos.css
+    │   │   │   ├── stylelog.css
+    │   │   │   ├── stylelogin.css
+    │   │   │   ├── stylemenu.css
+    │   │   │   ├── stylenova_avaliacao.css
+    │   │   │   └── stylerelatorios.css
+    │   │   └── js/
+    │   │       ├── loginScript.js
+    │   │       ├── menu-active.js
+    │   │       └── relatoriosScript.js
+    │   └── view/
+    │       ├── auditoria.ejs
+    │       ├── descricaoProduto.ejs
+    │       ├── login.ejs
+    │       ├── nova_avaliacao.ejs
+    │       ├── relatorios.ejs
+    │       └── resumos.ejs
+    ├── server/
+    │   ├── config/
+    │   │   └── connection.js
+    │   ├── controllers/
+    │   │   ├── auditoria.js
+    │   │   ├── avaliacaoClientes.js
+    │   │   ├── login.js
+    │   │   ├── produtos.js
+    │   │   ├── secureStorage.js
+    │   │   └── vendedores.js
+    │   ├── middlewares/
+    │   │   └── checkRole.js
+    │   ├── models/
+    │   │   └── role.js
+    │   ├── routers/
+    │   │   ├── auditoria.js
+    │   │   ├── descricoes.js
+    │   │   ├── login.js
+    │   │   ├── produtos.js
+    │   │   ├── relatorios.js
+    │   │   ├── resumos.js
+    │   │   ├── router.js
+    │   │   └── vendedores.js
+    │   ├── services/
+    │   │   └── crypto.js
+    │   └── app.js
+    ├── .env
+    ├── .gitignore
+    ├── main.js
+    ├── package-lock.json
+    ├── package.json
+    ├── preload.js
+    └── README.md
+    ```
+2. **Módulos utilizados**
+   
+    2a. devDependecies `npm i --save-dev`
+
+        - EJS: 3.1.10
+
+        - electron: 37.8.0
+
+        - express: 5.1.0
+
+        - express-session: 1.18.2
+
+    2b. dependences `npm i --save`
+
+        - dotenv: 17.2.3
+
+        - keytar: 7.9.0
+
+        - knex: 3.1.0
+
+        - pg: 8.16.3
+   
+        - swagger-ui-express: 5.0.1
+   
+        - yamljs: 0.3.0
+
+
+## 🔁 Fluxo geral
+![Fluxo de Dados PI](readme-images/fluxoDadosPI.png)
+    
 ## 🧭 Como acessar o repositório
 
 1. 📂 **Acesso ao Repositório**
@@ -138,6 +262,16 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
         npm i pg --save
         ```
 
+        - swagger:
+        ```
+        npm i swagger-ui-express --save
+        ```
+    
+       - yamljs:
+       ```
+       npm i yamljs --save
+       ```
+
 
 4. 💻 **Execução da Aplicação em Ambiente de Desenvolvimento**
 
@@ -195,4 +329,68 @@ O aprendizado dos comandos de terminal Linux mostrou-se essencial não apenas pa
 - Banco de dados: PostgreSQL 17.0
 
 - Sistema operacional compatível: Windows, Linux, macOS
+
+## 🎯 Exemplo de Uso
+
+Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenário real, apresentando o fluxo de interação do usuário, a visualização dos relatórios e o procedimento para registrar novas avaliações ou consultar informações já existentes.
+
+![Tela de login](readme-images/telaLogin.png)
+
+Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de resumos.
+
+![Tela de resumos](readme-images/telaResumos.png)
+
+A página de resumos funciona como a porta de entrada do sistema no Projeto Integrado. Assim que o usuário realiza o login, é para ela que é direcionado, pois concentra os botões principais de navegação para as funcionalidades mais importantes da aplicação.
+
+É nela que o usuário encontra, de forma simples e direta, o caminho para os outros módulos: o menu de auditoria, onde é possível verificar os registros de atividades; o relatório das avaliações, que apresenta indicadores e métricas relacionadas ao atendimento; e o relatório da descrição dos produtos, que organiza visualizações sobre o desempenho e características dos itens comercializados.
+
+![Tela de desempenho das vendas](readme-images/telaRelatorioVendas.png)
+
+O menu de Relatório de Avaliações é uma das seções mais importantes do sistema, pois reúne as informações referentes ao desempenho das vendas a partir das notas atribuídas pelos clientes. Ao acessar esse módulo, o usuário é recebido inicialmente pelo Relatório de Vendas, onde são apresentadas as médias de avaliação de cada vendedor.
+
+Para facilitar a visualização e a comparação dos resultados, a página exibe dois gráficos distintos: um destacando os três vendedores com as maiores médias e outro mostrando os três vendedores com as menores médias. Essa separação torna a análise mais clara, permitindo identificar rapidamente tanto os destaques positivos quanto os pontos que precisam de atenção.
+
+![Tela de desempenho dos produtos](readme-images/telaRelatorioProdutos.png)
+
+O Relatório de Produtos segue a mesma lógica de organização e clareza aplicada ao relatório de avaliações. Aqui, o foco muda do desempenho dos vendedores para o rendimento dos produtos, exibido por meio das médias de avaliação recebidas por cada item.
+
+Assim como no módulo anterior, o usuário encontra dois gráficos principais: um apresentando os três produtos com as melhores médias, evidenciando aqueles que têm se destacado em qualidade ou aceitação, e outro destacando os três produtos com as menores médias, facilitando a identificação de possíveis problemas ou oportunidades de melhoria.
+
+![Tela de desempenho dos atendimentos](readme-images/telaRelatorioAtendimentos.png)
+
+O Relatório de Atendimentos complementa a análise geral do sistema ao apresentar uma visão consolidada sobre a qualidade do atendimento prestado. Nesse módulo, o usuário tem acesso a um gráfico que mostra a quantidade de avaliações recebidas para cada nota, variando de 1 a 10.
+
+Essa abordagem permite identificar rapidamente padrões de satisfação: se há uma concentração maior de notas altas, indicando um atendimento eficiente, ou se existem recorrências de notas baixas que apontam para problemas específicos.
+
+Ao clicar em "Nova Avaliação", o usuário será redirecionado para um formulário onde poderá registrar uma nova avaliação.
+
+![Tela de nova avaliação](readme-images/telaNovaAvaliacao.png)
+
+A tela de Nova Avaliação é o espaço onde o usuário registra uma nova entrada no sistema, preenchendo um formulário simples e direto. Nessa interface, é possível inserir todos os dados necessários para que a avaliação seja registrada corretamente no banco.
+
+O usuário deve informar:
+
+- Nota da avaliação (0 a 10)
+
+- ID do cliente que está realizando a avaliação
+
+- Data e hora em que a avaliação foi feita
+
+- Descrição, onde é escrito o comentário principal do cliente
+
+- Tag da avaliação, que identifica se ela se refere a vendas, produtos ou atendimento
+
+Ao selecionar a tag, o sistema ajusta o formulário automaticamente.
+Se a escolha for “produto”, o usuário deverá indicar qual produto está sendo avaliado.
+Da mesma forma, se a tag for “vendas”, será necessário selecionar qual vendedor recebeu aquela avaliação.
+Para a tag “atendimento”, nenhuma seleção adicional é necessária.
+
+Depois de preencher todos os campos, basta clicar no botão “Enviar avaliação”, e o registro será armazenado no banco de dados do sistema.
+
+Essa tela demonstra como o usuário pode não apenas visualizar relatórios, mas também contribuir com novos dados que alimentam as análises apresentadas em outras seções do sistema.
+
+![Tela de auditoria](readme-images/telaAuditoria.png)
+
+Por fim, o sistema também conta com a tela de Auditoria, onde são exibidos os registros de atividades realizadas pelos usuários. Essa funcionalidade é **exclusiva para o perfil de chefe**, garantindo que apenas quem possui permissão adequada possa acompanhar, revisar e monitorar as ações executadas dentro da aplicação.
+
 
