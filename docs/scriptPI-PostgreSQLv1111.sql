@@ -66,6 +66,6 @@ ALTER ROLE chefe WITH NOSUPERUSER;
 GRANT SELECT, INSERT, DELETE ON cliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON avaliacaocliente TO atendente;
 GRANT SELECT, INSERT, DELETE ON venda TO atendente;
+GRANT SELECT, INSERT, DELETE ON produto TO atendente;
 GRANT INSERT ON log_auditoria TO atendente;
-
 GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO chefe;
