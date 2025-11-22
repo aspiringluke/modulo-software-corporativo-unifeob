@@ -4,7 +4,7 @@ GRANT chefe TO chefeTeste;
 CREATE USER 'atendTeste' WITH LOGIN PASSWORD 'atend123';
 GRANT atendente TO 'atendTeste';
 
-INSERT INTO cliente (nome  cnpj, cidade) VALUES
+INSERT INTO cliente (nome, cnpj, cidade) VALUES
 ('SP Pierin', '45667854300012', 'Santa Cruz das Palmeiras'),
 ('Henrique', '34567432500001', 'Casa Branca'),
 ('Max', '23456788765432', 'SJBV'),
