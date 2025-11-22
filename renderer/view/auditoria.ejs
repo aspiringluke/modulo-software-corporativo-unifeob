@@ -31,7 +31,8 @@
 
 	<main class="main-content">
 		<div class="logo"></div>
-		<div class="table-container">
+		
+		<div class="table-container" id="container-tabela">
 			<table class="auditoria-table">
 				<caption>Log de Auditoria</caption>
 				<thead>
@@ -44,35 +45,22 @@
 						<th>Horário</th>
 					</tr>
 				</thead>
-					<tbody>
-						<% if (registro_auditoria) { %>
-							<% registro_auditoria.forEach(registro => { %>
-								<tr>
-									<td><%= registro.tabela %></td>
-									<!-- <td><%= registro.operacao %></td> -->
-									<td>
-										<span class="badge op-<%= registro.operacao.toLowerCase() %>">
-											<%= registro.operacao %>
-										</span>
-									</td>
-									<td><pre><%= JSON.stringify(registro.registro_antigo, null, 2) %></pre></td>
-									<td><pre><%= JSON.stringify(registro.registro_novo, null, 2) %></pre></td>
-									<td><%= registro.usuario %></td>
-									<td><%= registro.horario %></td>
-								</tr>
-							<% }) %>
-						<% } else if (erro) { %>
-								<tr>
-									<td colspan="6" id="colerror"><%= erro %></td>
-								</tr>
-						<% } else { %>
-								<tr>
-									<td colspan="6" id="colerror">Nenhum registro encontrado</td>
-								</tr>
-						<% } %>
+				<tbody id="tabela-corpo">
 				</tbody>
 			</table>
 		</div>
+		
+		<div id="mensagem-vazia" style="display:none; text-align:center; padding:20px;">
+			Nenhum registro encontrado.
+		</div>
 	</main>
+
+	<script>
+		// <%- %> (sem escape) é usado para imprimir o JSON puro.
+		// O "|| []" previne erro se a variável vier nula do back.
+		const DADOS_BRUTOS = <%- JSON.stringify(registro_auditoria || []) %>;
+	</script>
+
+	<script src="/js/auditoriaScript.js"></script>
 </body>
 </html>

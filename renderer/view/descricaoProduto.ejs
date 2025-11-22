@@ -34,12 +34,18 @@
             <h1>Avaliações Recentes</h1>
 
             <div class="filtragem">
+                <h3>Categoria: </h3>
+                <select class="buttonsFiltragem" id="categorias">
+                    <option value="vendedores">Vendedores</option>
+                    <option value="produtos" selected>Produtos</option>
+                    <option value="atendimento">Atendimento</option>
+                </select>
                 <h3>Filtros: </h3>
                 <select class="buttonsFiltragem" id="campoFiltro">
                     <option value="idAvaliacao">ID da Avaliação</option>
                     <option value="descricao">Conteúdo da descrição da avaliação</option>
                     <option value="nota">Nota</option>
-                    <option value="nomeProduto">Nome do produto</option>
+                    <option value="nomePrincipal">Nome do produto</option>
                     <option value="nomeCliente">Nome do cliente</option>
                 </select>
                 <select class="buttonsFiltragem" id="operadorFiltro">
@@ -56,12 +62,17 @@
                 <select class="buttonsFiltragem" id="ordenar">
                     <option value="idAvaliacao">ID</option>
                     <option value="nota">Nota</option>
-                    <option value="nomeProduto">Nome do Produto</option>
+                    <option value="nomePrincipal">Nome (Produto ou Vendedor)</option>
                     <option value="nomeCliente">Nome do Cliente</option>
                     <option value="data">Data</option>
                 </select>
             </div>
-            <div class="container" id="avaliacoes"></div>
+            <!-- <div class="container" id="avaliacoes"></div> -->
+            <div id="virtual-window" style="height: 800px; overflow-y: auto; position: relative; border: 1px solid #ccc 5px;">
+                <div id="phantom-height" style="position: absolute; width: 100%; z-index: -1;"></div>
+                
+                <div class="container" id="avaliacoes"></div>
+            </div>
             <div id="erro"></div>
         </div>
     </main>

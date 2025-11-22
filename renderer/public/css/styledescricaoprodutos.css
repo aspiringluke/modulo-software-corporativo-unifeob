@@ -38,6 +38,12 @@ h1 {
     border-bottom: 2px solid #e5e7eb;
 }
 
+h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -69,7 +75,7 @@ h1 {
     margin-bottom: 12px;
 }
 
-.nomeProduto {
+.nome{
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-main);
