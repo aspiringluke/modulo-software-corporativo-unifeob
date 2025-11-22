@@ -1,8 +1,8 @@
-CREATE USER chefeTeste WITH LOGIN PASSWORD 'chefe123';
-GRANT chefe TO chefeTeste;
+CREATE USER chefeteste WITH LOGIN PASSWORD 'chefe123';
+GRANT chefe TO chefeteste;
 
-CREATE USER atendTeste WITH LOGIN PASSWORD 'atend123';
-GRANT atendente TO atendTeste;
+CREATE USER atendteste WITH LOGIN PASSWORD 'atend123';
+GRANT atendente TO atendteste;
 
 INSERT INTO cliente (nome, cnpj, cidade) VALUES
 ('SP Pierin', '45667854300012', 'Santa Cruz das Palmeiras'),
