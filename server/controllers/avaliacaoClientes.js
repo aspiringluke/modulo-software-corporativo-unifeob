@@ -1,6 +1,5 @@
 import { conectar } from "../config/connection.js";
 import { lerCredenciais } from "./secureStorage.js";
-import { decrypt } from "../services/crypto.js";
 
 export async function getAvaliacoesAtendimento(req, res)
 {
@@ -10,12 +9,39 @@ export async function getAvaliacoesAtendimento(req, res)
     try {
         const results = await knex("avaliacaocliente").select("*").where('idproduto', null).andWhere('idvendedor', null);
 
-        const quantidadeNotasAtendimento = {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0}
-        let notas = results.forEach(n => {
-            quantidadeNotasAtendimento[n.nota.toString()]++;
-        });
+        if(req.query.contexto === "graficos")
+        {
+            const quantidadeNotasAtendimento = {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0}
+            let notas = results.forEach(n => {
+                quantidadeNotasAtendimento[n.nota.toString()]++;
+            });
 
-        res.status(200).json({ "labels": ["1","2","3","4","5","6","7","8","9","10"], "notas": Object.values(quantidadeNotasAtendimento) });
+            res.status(200).json({ "labels": ["1","2","3","4","5","6","7","8","9","10"], "notas": Object.values(quantidadeNotasAtendimento) });
+        }
+        else if(req.query.contexto === "descricoes")
+        {
+            const idAvaliacao=[], nota=[], descricao=[], nomeCliente=[], data=[];
+            for(const r of results)
+            {
+                idAvaliacao.push(r.idavaliacao);
+                nota.push(r.nota);
+                descricao.push(r.descricao);
+                nomeCliente.push(r.nome);
+                data.push(r.dataavaliacao);
+            }
+
+            res.status(200).json({
+                "idAvaliacao": idAvaliacao,
+                "nota": nota,
+                "descricao": descricao,
+                "nomeCliente": nomeCliente,
+                "data": data
+            })
+        }
+        else
+        {
+            res.status(400).json({"error": "Parâmetros inválidos"})
+        }
     } catch (error) {
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     } finally {
@@ -31,7 +57,7 @@ export async function getAvaliacoesProdutos(req,res){
         // o contexto seleciona quais dados enviar para o front
         // grafico -> labels e notas
         // descricoes -> todos os dados
-        if(req.query.contexto === "grafico")
+        if(req.query.contexto === "graficos")
         {
             const result = await knex("avaliacaocliente as a")
                 .select("p.descricao")
@@ -89,21 +115,55 @@ export async function getAvaliacoesVendedores(req,res){
     const knex = conectar(req.session.usuario, senha);
 
     try {
-        const result = await knex("avaliacaocliente as a")
-        .select("v.nome")
-        .join("vendedor as v", "v.idvendedor", "=", "a.idvendedor")
-        .avg("a.nota as notas")
-        .groupBy("v.nome")
-        .orderBy("notas", "desc");
+        if(req.query.contexto === "graficos")
+        {
+            const result = await knex("avaliacaocliente as a")
+            .select("v.nome")
+            .join("vendedor as v", "v.idvendedor", "=", "a.idvendedor")
+            .avg("a.nota as notas")
+            .groupBy("v.nome")
+            .orderBy("notas", "desc");
 
-        const nomes=[], notas=[];
+            const nomes=[], notas=[];
 
-        result.forEach(r => {
-            nomes.push(r.nome);
-            notas.push(r.notas);
-        })
+            result.forEach(r => {
+                nomes.push(r.nome);
+                notas.push(r.notas);
+            })
 
-        res.status(200).json({"labels": nomes, "notas": notas})
+            res.status(200).json({"labels": nomes, "notas": notas})
+        }
+        else if(req.query.contexto === "descricoes")
+        {
+            const results = await knex("avaliacaocliente as a")
+                .select(["a.idavaliacao","a.nota","v.nome as nomeVendedor","a.descricao","c.nome","a.dataavaliacao"])
+                .join("vendedor as v", "a.idvendedor", "=", "v.idvendedor")
+                .join("cliente as c", "a.idcliente", "=", "c.idcliente")
+                .orderBy("v.nome", "asc");
+            
+            const idAvaliacao=[], nota=[], nomeVendedor=[], descricao=[], nomeCliente=[], data=[];
+            for(const r of results)
+            {
+                idAvaliacao.push(r.idavaliacao);
+                nota.push(r.nota);
+                nomeVendedor.push(r.nomeVendedor);
+                descricao.push(r.descricao);
+                nomeCliente.push(r.nome);
+                data.push(r.dataavaliacao);
+            }
+            res.status(200).json({
+                "idAvaliacao": idAvaliacao,
+                "nota": nota,
+                "nomeVendedor": nomeVendedor,
+                "descricao": descricao,
+                "nomeCliente": nomeCliente,
+                "data": data
+            });
+        }
+        else
+        {
+            res.status(400).json({"error": "Parâmetros inválidos"})
+        }
     } catch (error) {
         res.status(500).json({erro: "Houve um problema ao conectar com o banco de dados: " + error});
     }

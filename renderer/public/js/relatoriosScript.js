@@ -15,7 +15,7 @@ const BEST = 0, WORST = 1;
 
 async function atualizarRelatorios(categoria){
     const preElem = document.getElementById("teste");
-    const url = `http://localhost:4040/relatorios/avaliacaoclientes/${categoria + (categoria === "produtos" ? "?contexto=grafico" : "")}`
+    const url = `http://localhost:4040/relatorios/avaliacaoclientes/${categoria + "?contexto=graficos"}`
     const result = await fetch(url);
     const data = await result.json();
     avaliacoes = data;
