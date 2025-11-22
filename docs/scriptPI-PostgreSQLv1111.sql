@@ -14,6 +14,11 @@ CREATE TABLE produto (
     valorUnitario DECIMAL(10, 2)
 );
 
+CREATE TABLE vendedor (
+    idVendedor SERIAL NOT NULL PRIMARY KEY,
+    nome VARCHAR(60)
+);
+
 CREATE TABLE avaliacaocliente (
     idAvaliacao SERIAL PRIMARY KEY,
     nota INT,
@@ -39,11 +44,6 @@ CREATE TABLE venda (
 CREATE TABLE contexto (
     idContexto SERIAL NOT NULL PRIMARY KEY,
     descricao VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE vendedor (
-    idVendedor SERIAL NOT NULL PRIMARY KEY,
-    nome VARCHAR(60)
 );
 
 CREATE TABLE log_auditoria (
