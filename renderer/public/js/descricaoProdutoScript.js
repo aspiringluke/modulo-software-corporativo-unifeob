@@ -46,7 +46,7 @@ function filtrar()
     {
         for(const card of cards)
         {
-            const result = card.getAttribute(selectedCampo).includes(valor.value);
+            const result = card.getAttribute(selectedCampo).includes(valor.value.toUpperCase());
             if(!result)
                 // esconder os que não se encaixarem
                 card.style.display = "none";

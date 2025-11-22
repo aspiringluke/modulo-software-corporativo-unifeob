@@ -67,12 +67,24 @@ function criarGrafico(tipoGrafico, ctx, ehMelhores, categoria)
             datasets: [{
                 label: 'Nota',
                 data: ehMelhores ? avaliacoes?.notas : avaliacoes?.notas.toReversed(),
-                borderWidth: 2
+                borderWidth: 2,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointHitRadius: 40
             }]
         },
         options: {
             scales: {
-                x: { min: 0, max: 9},
+                x: {
+                    min: 0, max: categoria !== "vendedores" ? 9 : 2,
+                    ticks: {
+                        callback: function(value,index,values){
+                            const label = this.getLabelForValue(value);
+                            // return label.split(' '); // solução 1
+                            if(label.length > 15) return label.substr(0,15) + "..."; // solução 2
+                        }
+                    }
+                },
                 y: { beginAtZero: true }
             },
             animation: { animateRotate: true, animateScale: true },
@@ -103,7 +115,9 @@ function criarGrafico(tipoGrafico, ctx, ehMelhores, categoria)
                     backgroundColor: ehMelhores ? "#33ee55" : "#ee3355",
                     borderColor: ehMelhores ? "#33ee55" : "#ee3355"
                 },
-                bar: { backgroundColor: "#33ee55" }
+                bar: {
+                    backgroundColor: ehMelhores ? "#33ee55" : "#ee3355"
+                }
             },
             responsive: true,
             maintainAspectRatio: false,
