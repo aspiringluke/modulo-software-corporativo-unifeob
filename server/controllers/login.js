@@ -22,7 +22,7 @@ export async function login(req,res)
         req.session.usuario = usuario;
         req.session.roles = roles;
 
-        res.render("resumos", {usuario: req.session.usuario, roles: req.session.roles});
+        res.render("relatorios", {usuario: req.session.usuario, roles: req.session.roles});
     } catch(err) {
         res.render("login", {erro: "Usuário ou senha inválidos.", roles: null});
     }
