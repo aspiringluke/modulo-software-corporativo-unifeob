@@ -118,7 +118,7 @@ async function carregarAvaliacoes() {
 function aplicarFiltros() {
     const campoSelecionado = campo.value;
     const operadorSelecionado = op.value;
-    const valorDigitado = valor.value.toLowerCase();
+    const valorDigitado = valor.value.toUpperCase();
 
     if (!valorDigitado && operadorSelecionado !== '!=') {
         listaFiltrada = [...listaCompleta];
@@ -142,14 +142,11 @@ function aplicarFiltros() {
                 }
             } else {
                 // Tratamento Texto (Seguro contra null/undefined)
-                const itemString = String(valorItem || "").toLowerCase();
+                const itemString = String(valorItem || "").toUpperCase();
                 
-                switch (operadorSelecionado) {
-                    case '==': return itemString === valorDigitado;
-                    case 'pertence': return itemString.includes(valorDigitado);
-                    case '!=': return itemString !== valorDigitado;
-                    default: return itemString.includes(valorDigitado);
-                }
+                return itemString.includes(valorDigitado);
+                 
+                
             }
         });
     }
