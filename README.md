@@ -336,17 +336,12 @@ Nesta seção, será demonstrado como o sistema pode ser utilizado em um cenári
 
 ![Tela de login](readme-images/telaLogin.png)
 
-Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de resumos.
+Após iniciar o sistema com ```npm start```, a tela de login será inicializada. Após fazer a autenticação com sucesso, o usuário será redirecionado para página de relatório de avaliações.
 
-![Tela de resumos](readme-images/telaResumos.png)
-
-A página de resumos funciona como a porta de entrada do sistema no Projeto Integrado. Assim que o usuário realiza o login, é para ela que é direcionado, pois concentra os botões principais de navegação para as funcionalidades mais importantes da aplicação.
-
-É nela que o usuário encontra, de forma simples e direta, o caminho para os outros módulos: o menu de auditoria, onde é possível verificar os registros de atividades; o relatório das avaliações, que apresenta indicadores e métricas relacionadas ao atendimento; e o relatório da descrição dos produtos, que organiza visualizações sobre o desempenho e características dos itens comercializados.
 
 ![Tela de desempenho das vendas](readme-images/telaRelatorioVendas.png)
 
-O menu de Relatório de Avaliações é uma das seções mais importantes do sistema, pois reúne as informações referentes ao desempenho das vendas a partir das notas atribuídas pelos clientes. Ao acessar esse módulo, o usuário é recebido inicialmente pelo Relatório de Vendas, onde são apresentadas as médias de avaliação de cada vendedor.
+Essa é uma das seções mais importantes do sistema, pois reúne as informações referentes ao desempenho das vendas a partir das notas atribuídas pelos clientes. Ao acessar esse módulo, o usuário é recebido inicialmente pelo Relatório de Vendas, onde são apresentadas as médias de avaliação de cada vendedor.
 
 Para facilitar a visualização e a comparação dos resultados, a página exibe dois gráficos distintos: um destacando os três vendedores com as maiores médias e outro mostrando os três vendedores com as menores médias. Essa separação torna a análise mais clara, permitindo identificar rapidamente tanto os destaques positivos quanto os pontos que precisam de atenção.
 
@@ -392,5 +387,6 @@ Essa tela demonstra como o usuário pode não apenas visualizar relatórios, mas
 ![Tela de auditoria](readme-images/telaAuditoria.png)
 
 Por fim, o sistema também conta com a tela de Auditoria, onde são exibidos os registros de atividades realizadas pelos usuários. Essa funcionalidade é **exclusiva para o perfil de chefe**, garantindo que apenas quem possui permissão adequada possa acompanhar, revisar e monitorar as ações executadas dentro da aplicação.
+
 
 
